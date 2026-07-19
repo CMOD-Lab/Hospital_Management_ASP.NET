@@ -1,0 +1,43 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.DoctorProfileModel
+@{
+    ViewData["Title"] = "Doctor Profile";
+    Layout = "_PatientLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0"><i class="fas fa-user-md me-2"></i>Doctor Profile</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <i class="fas fa-user-md fa-5x text-success mb-3"></i>
+                        <h4>@Model.Profile.Name</h4>
+                        <p class="text-muted">@Model.Profile.Specialization</p>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tr><td><strong>Phone:</strong></td><td>@Model.Profile.Phone</td></tr>
+                            <tr><td><strong>Gender:</strong></td><td>@Model.Profile.Gender</td></tr>
+                            <tr><td><strong>Age:</strong></td><td>@Model.Profile.Age</td></tr>
+                            <tr><td><strong>Experience:</strong></td><td>@Model.Profile.Experience years</td></tr>
+                            <tr><td><strong>Qualification:</strong></td><td>@Model.Profile.Qualification</td></tr>
+                            <tr><td><strong>Charges/Visit:</strong></td><td>$@Model.Profile.ChargesPerVisit</td></tr>
+                            <tr><td><strong>Repute Index:</strong></td><td>@Model.Profile.ReputeIndex.ToString("F2")</td></tr>
+                            <tr><td><strong>Patients Treated:</strong></td><td>@Model.Profile.PatientsTreated</td></tr>
+                        </table>
+                        <a href="/Patient/TakeAppointment?doctorId=@Model.Profile.DoctorId" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>Take Appointment
+                        </a>
+                        <a href="/Patient/ViewDoctors" class="btn btn-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

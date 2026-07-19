@@ -1,0 +1,55 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.TakeAppointmentModel
+@{
+    ViewData["Title"] = "Take Appointment";
+    Layout = "_PatientLayout";
+}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <h2><i class="fas fa-calendar-plus me-2"></i>Take Appointment</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <p class="lead">@Model.AppointmentModel.Message</p>
+
+        @if (Model.AppointmentModel.FreeSlots.Any())
+        {
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Slot ID</th>
+                        <th>Timings</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int rowNum = 1;}
+                    @foreach (var slot in Model.AppointmentModel.FreeSlots)
+                    {
+                        <tr>
+                            <td>@rowNum</td>
+                            <td>@slot.SlotId</td>
+                            <td>@slot.Timings</td>
+                            <td>
+                                <a href="/Patient/AppointmentRequestSent?doctorId=@Model.AppointmentModel.DoctorId&freeSlot=@slot.SlotId"
+                                   class="btn btn-sm btn-primary">
+                                    <i class="fas fa-check me-1"></i>Select
+                                </a>
+                            </td>
+                        </tr>
+                        rowNum++;
+                    }
+                </tbody>
+            </table>
+        }
+
+        <a href="/Patient/ViewDoctors" class="btn btn-secondary mt-2">
+            <i class="fas fa-arrow-left me-2"></i>Back to Doctors
+        </a>
+    </div>
+</div>

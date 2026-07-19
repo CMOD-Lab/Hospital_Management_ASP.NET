@@ -1,0 +1,67 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.ViewDoctorsModel
+@{
+    ViewData["Title"] = "View Doctors";
+    Layout = "_PatientLayout";
+}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <h2><i class="fas fa-user-md me-2"></i>View Doctors</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="get">
+            <div class="row align-items-end">
+                <div class="col-md-8">
+                    <label class="form-label">Select Department</label>
+                    <select name="deptName" class="form-select" onchange="this.form.submit()">
+                        <option value="">-- Select Department --</option>
+                        @foreach (var dept in Model.DoctorsModel.Departments)
+                        {
+                            if (Model.DoctorsModel.SelectedDepartment == dept.DeptName)
+                            {
+                                <option value="@dept.DeptName" selected>@dept.DeptName</option>
+                            }
+                            else
+                            {
+                                <option value="@dept.DeptName">@dept.DeptName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.DoctorsModel.Doctors.Any())
+{
+    <div class="row">
+        @foreach (var doc in Model.DoctorsModel.Doctors)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-md fa-3x text-success mb-2"></i>
+                        <h5>@doc.Name</h5>
+                        <p class="text-muted">@doc.Specialization</p>
+                        <p><span class="badge bg-info">@doc.DepartmentName</span></p>
+                        <p><strong>Charges:</strong> $@doc.ChargesPerVisit</p>
+                        <p><strong>Repute Index:</strong> @doc.ReputeIndex.ToString("F2")</p>
+                        <a href="/Patient/DoctorProfile?doctorId=@doc.DoctorId" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-eye me-1"></i>View Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (!string.IsNullOrEmpty(Model.DoctorsModel.SelectedDepartment))
+{
+    <div class="alert alert-info">No doctors found for the selected department.</div>
+}

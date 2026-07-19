@@ -1,0 +1,99 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.HistoryUpdateModel
+@{
+    ViewData["Title"] = "History Update";
+    Layout = "_DoctorLayout";
+}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <h2><i class="fas fa-notes-medical me-2"></i>History Update</h2>
+        <hr />
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success">@Model.Message</div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Today's Appointments</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.UpdateModel.TodaysAppointments.Any())
+                {
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient</th>
+                                <th>Timings</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var appt in Model.UpdateModel.TodaysAppointments)
+                            {
+                                <tr>
+                                    <td>@appt.AppointmentId</td>
+                                    <td>@appt.PatientName</td>
+                                    <td>@appt.Timings</td>
+                                    <td>
+                                        <a href="/Doctor/HistoryUpdate?appointmentId=@appt.AppointmentId"
+                                           class="btn btn-sm btn-primary">Select</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted">No appointments for today.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (Model.UpdateModel.AppointmentId > 0)
+    {
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Update Prescription - @Model.UpdateModel.PatientName</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" asp-for="UpdateModel.AppointmentId" />
+                        <div class="mb-3">
+                            <label asp-for="UpdateModel.Disease" class="form-label">Disease</label>
+                            <input asp-for="UpdateModel.Disease" class="form-control" />
+                            <span asp-validation-for="UpdateModel.Disease" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UpdateModel.Progress" class="form-label">Progress</label>
+                            <textarea asp-for="UpdateModel.Progress" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="UpdateModel.Progress" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UpdateModel.Prescription" class="form-label">Prescription</label>
+                            <textarea asp-for="UpdateModel.Prescription" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="UpdateModel.Prescription" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

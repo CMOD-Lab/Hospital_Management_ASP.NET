@@ -1,0 +1,24 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.CurrentAppointmentModel
+@{
+    ViewData["Title"] = "Current Appointment";
+    Layout = "_PatientLayout";
+}
+<h2><i class="fas fa-calendar me-2"></i>Current Appointment</h2><hr />
+<div class="card shadow">
+    <div class="card-body text-center py-5">
+        @if (Model.AppointmentInfo.HasAppointment)
+        {
+            <i class="fas fa-calendar-check fa-4x text-success mb-3"></i>
+            <h4>You have an appointment today!</h4>
+            <p><strong>Doctor:</strong> @Model.AppointmentInfo.DoctorName</p>
+            <p><strong>Timings:</strong> @Model.AppointmentInfo.Timings</p>
+        }
+        else
+        {
+            <i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>
+            <h4 class="text-muted">No current appointment for today.</h4>
+            <a href="/Patient/ViewDoctors" class="btn btn-primary mt-2">Book an Appointment</a>
+        }
+    </div>
+</div>

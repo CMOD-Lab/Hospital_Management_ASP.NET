@@ -1,0 +1,23 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.PatientNotificationsModel
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "_PatientLayout";
+}
+<h2><i class="fas fa-bell me-2"></i>Notifications</h2><hr />
+<div class="card shadow">
+    <div class="card-body text-center py-5">
+        @if (Model.NotificationInfo.HasNotification)
+        {
+            <i class="fas fa-bell fa-4x text-warning mb-3"></i>
+            <h4>You have a notification!</h4>
+            <p><strong>Doctor:</strong> @Model.NotificationInfo.DoctorName</p>
+            <p><strong>Timings:</strong> @Model.NotificationInfo.Timings</p>
+        }
+        else
+        {
+            <i class="fas fa-bell-slash fa-4x text-muted mb-3"></i>
+            <h4 class="text-muted">No notifications at this time.</h4>
+        }
+    </div>
+</div>

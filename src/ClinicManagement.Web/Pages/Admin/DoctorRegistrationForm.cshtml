@@ -1,0 +1,122 @@
+@page
+@model ClinicManagement.Web.Pages.Admin.DoctorRegistrationFormModel
+@{
+    ViewData["Title"] = "Doctor Registration";
+    Layout = "_AdminLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-user-md me-2"></i>Doctor Registration Form</h4>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.FormModel.SuccessMessage))
+                {
+                    <div class="alert alert-success">@Model.FormModel.SuccessMessage</div>
+                }
+                @if (!string.IsNullOrEmpty(Model.FormModel.ErrorMessage))
+                {
+                    <div class="alert alert-danger">@Model.FormModel.ErrorMessage</div>
+                }
+
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Name" class="form-label">Full Name</label>
+                            <input asp-for="FormModel.Name" class="form-control" />
+                            <span asp-validation-for="FormModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Email" class="form-label">Email</label>
+                            <input asp-for="FormModel.Email" class="form-control" />
+                            <span asp-validation-for="FormModel.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Password" class="form-label">Password</label>
+                            <input asp-for="FormModel.Password" type="password" class="form-control" />
+                            <span asp-validation-for="FormModel.Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.BirthDate" class="form-label">Birth Date</label>
+                            <input asp-for="FormModel.BirthDate" type="date" class="form-control" />
+                            <span asp-validation-for="FormModel.BirthDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.DeptNo" class="form-label">Department</label>
+                            <select asp-for="FormModel.DeptNo" class="form-select">
+                                <option value="0">Select Department</option>
+                                @foreach (var dept in Model.FormModel.Departments)
+                                {
+                                    <option value="@dept.DeptNo">@dept.DeptName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="FormModel.DeptNo" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Phone" class="form-label">Phone</label>
+                            <input asp-for="FormModel.Phone" class="form-control" />
+                            <span asp-validation-for="FormModel.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Gender</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="FormModel.Gender" value="M" id="gM" />
+                                    <label class="form-check-label" for="gM">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="FormModel.Gender" value="F" id="gF" />
+                                    <label class="form-check-label" for="gF">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Address" class="form-label">Address</label>
+                            <input asp-for="FormModel.Address" class="form-control" />
+                            <span asp-validation-for="FormModel.Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="FormModel.Experience" class="form-label">Experience (years)</label>
+                            <input asp-for="FormModel.Experience" type="number" class="form-control" />
+                            <span asp-validation-for="FormModel.Experience" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="FormModel.Salary" class="form-label">Salary</label>
+                            <input asp-for="FormModel.Salary" type="number" class="form-control" />
+                            <span asp-validation-for="FormModel.Salary" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="FormModel.ChargesPerVisit" class="form-label">Charges Per Visit</label>
+                            <input asp-for="FormModel.ChargesPerVisit" type="number" class="form-control" />
+                            <span asp-validation-for="FormModel.ChargesPerVisit" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Specialization" class="form-label">Specialization</label>
+                            <input asp-for="FormModel.Specialization" class="form-control" />
+                            <span asp-validation-for="FormModel.Specialization" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FormModel.Qualification" class="form-label">Qualification</label>
+                            <input asp-for="FormModel.Qualification" class="form-control" />
+                            <span asp-validation-for="FormModel.Qualification" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Register Doctor
+                        </button>
+                        <a href="/Admin/AdminHome" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

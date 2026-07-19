@@ -1,0 +1,32 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.PreviousHistoryModel
+@{
+    ViewData["Title"] = "Previous History";
+    Layout = "_DoctorLayout";
+}
+<h2><i class="fas fa-history me-2"></i>Previous History</h2><hr />
+<div class="card shadow">
+    <div class="card-body">
+        @if (Model.HistoryModel.Records.Any())
+        {
+            <table class="table table-striped">
+                <thead class="table-dark"><tr><th>ID</th><th>Patient</th><th>Disease</th><th>Prescription</th><th>Progress</th><th>Paid</th><th>Date</th></tr></thead>
+                <tbody>
+                    @foreach (var r in Model.HistoryModel.Records)
+                    {
+                        <tr>
+                            <td>@r.AppointmentId</td>
+                            <td>@r.PatientName</td>
+                            <td>@r.Disease</td>
+                            <td>@r.Prescription</td>
+                            <td>@r.Progress</td>
+                            <td>@(r.IsPaid ? "Yes" : "No")</td>
+                            <td>@r.AppointmentDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else { <div class="alert alert-info">No previous history found.</div> }
+    </div>
+</div>

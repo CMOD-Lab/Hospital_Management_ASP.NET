@@ -1,0 +1,30 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.TreatmentHistoryModel
+@{
+    ViewData["Title"] = "Treatment History";
+    Layout = "_PatientLayout";
+}
+<h2><i class="fas fa-notes-medical me-2"></i>Treatment History</h2><hr />
+<div class="card shadow">
+    <div class="card-body">
+        @if (Model.TreatmentHistory.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead class="table-dark"><tr><th>Doctor</th><th>Disease</th><th>Prescription</th><th>Progress</th><th>Date</th></tr></thead>
+                <tbody>
+                    @foreach (var r in Model.TreatmentHistory.Records)
+                    {
+                        <tr>
+                            <td>@r.DoctorName</td>
+                            <td>@r.Disease</td>
+                            <td>@r.Prescription</td>
+                            <td>@r.Progress</td>
+                            <td>@r.AppointmentDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else { <div class="alert alert-info">No treatment history found.</div> }
+    </div>
+</div>

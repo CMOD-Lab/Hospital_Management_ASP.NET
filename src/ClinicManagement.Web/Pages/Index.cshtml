@@ -1,0 +1,114 @@
+@page
+@model ClinicManagement.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Login / Sign Up";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="text-center mb-4">
+            <h1 class="display-4"><i class="fas fa-hospital-alt text-primary me-2"></i>Clinic Management System</h1>
+            <p class="lead text-muted">Your health, our priority</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @Model.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="row">
+            <!-- Login Form -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-page-handler="Login">
+                            <div class="mb-3">
+                                <label asp-for="LoginModel.Email" class="form-label">Email Address</label>
+                                <input asp-for="LoginModel.Email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="LoginModel.Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="LoginModel.Password" class="form-label">Password</label>
+                                <input asp-for="LoginModel.Password" class="form-control" placeholder="Enter your password" />
+                                <span asp-validation-for="LoginModel.Password" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Patient Sign Up</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-page-handler="SignUp">
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.Name" class="form-label">Full Name</label>
+                                <input asp-for="SignUpModel.Name" class="form-control" placeholder="Enter your name" />
+                                <span asp-validation-for="SignUpModel.Name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.BirthDate" class="form-label">Birth Date</label>
+                                <input asp-for="SignUpModel.BirthDate" type="date" class="form-control" />
+                                <span asp-validation-for="SignUpModel.BirthDate" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.Email" class="form-label">Email</label>
+                                <input asp-for="SignUpModel.Email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="SignUpModel.Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.Password" class="form-label">Password</label>
+                                <input asp-for="SignUpModel.Password" class="form-control" placeholder="Enter password" />
+                                <span asp-validation-for="SignUpModel.Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.Phone" class="form-label">Phone</label>
+                                <input asp-for="SignUpModel.Phone" class="form-control" placeholder="Enter phone number" />
+                                <span asp-validation-for="SignUpModel.Phone" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="SignUpModel.Address" class="form-label">Address</label>
+                                <input asp-for="SignUpModel.Address" class="form-control" placeholder="Enter address" />
+                                <span asp-validation-for="SignUpModel.Address" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="SignUpModel.Gender" value="M" id="genderM" />
+                                        <label class="form-check-label" for="genderM">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="SignUpModel.Gender" value="F" id="genderF" />
+                                        <label class="form-check-label" for="genderF">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
