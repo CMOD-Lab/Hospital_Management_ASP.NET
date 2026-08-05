@@ -1,0 +1,75 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.DoctorHomeModel
+@{
+    ViewData["Title"] = "Doctor Home";
+    Layout = "_DoctorLayout";
+}
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-stethoscope me-2"></i>Doctor Dashboard</h2>
+
+    @if (Model.DoctorInfo != null)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>Doctor Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tr><th>Name</th><td>@Model.DoctorInfo.Name</td></tr>
+                            <tr><th>Phone</th><td>@Model.DoctorInfo.Phone</td></tr>
+                            <tr><th>Department</th><td>@Model.DoctorInfo.Department</td></tr>
+                            <tr><th>Specialization</th><td>@Model.DoctorInfo.Specialization</td></tr>
+                            <tr><th>Qualification</th><td>@Model.DoctorInfo.Qualification</td></tr>
+                            <tr><th>Charges/Visit</th><td>$@Model.DoctorInfo.ChargesPerVisit.ToString("N2")</td></tr>
+                            <tr><th>Repute Index</th><td>@Model.DoctorInfo.ReputeIndex?.ToString("N2")</td></tr>
+                            <tr><th>Patients Treated</th><td>@Model.DoctorInfo.PatientsTreated</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="/Doctor/PendingAppointment" class="text-decoration-none">
+                            <div class="card bg-warning text-white text-center p-3 shadow h-100">
+                                <i class="fas fa-clock fa-3x mb-2"></i>
+                                <h6>Pending Appointments</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Doctor/PatientHistory" class="text-decoration-none">
+                            <div class="card bg-primary text-white text-center p-3 shadow h-100">
+                                <i class="fas fa-history fa-3x mb-2"></i>
+                                <h6>Patient History</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Doctor/Bill" class="text-decoration-none">
+                            <div class="card bg-success text-white text-center p-3 shadow h-100">
+                                <i class="fas fa-file-invoice-dollar fa-3x mb-2"></i>
+                                <h6>Bills</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Doctor/PreviousHistory" class="text-decoration-none">
+                            <div class="card bg-info text-white text-center p-3 shadow h-100">
+                                <i class="fas fa-notes-medical fa-3x mb-2"></i>
+                                <h6>Previous History</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">Unable to load doctor information.</div>
+    }
+</div>

@@ -1,0 +1,57 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.PatientHistoryModel
+@{
+    ViewData["Title"] = "Patient History";
+    Layout = "_DoctorLayout";
+}
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-history me-2"></i>Today's Patients</h2>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @Model.Message
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            @if (Model.TodaysAppointments.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th><th>Patient</th><th>Date</th><th>Disease</th><th>Progress</th><th>Prescription</th><th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var appt in Model.TodaysAppointments)
+                            {
+                                <tr>
+                                    <td>@appt.AppointId</td>
+                                    <td>@appt.PatientName</td>
+                                    <td>@appt.Date?.ToString("HH:mm")</td>
+                                    <td>@appt.Disease</td>
+                                    <td>@appt.Progress</td>
+                                    <td>@appt.Prescription</td>
+                                    <td>
+                                        <a href="/Doctor/HistoryUpdate?appointmentId=@appt.AppointId" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-edit me-1"></i>Update
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info"><i class="fas fa-info-circle me-2"></i>No appointments today.</div>
+            }
+        </div>
+    </div>
+</div>
