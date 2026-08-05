@@ -15,14 +15,15 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // Register DbContext with SQL Server
+        // Register DbContext with PostgreSQL
         services.AddDbContext<ClinicDbContext>(options =>
-            options.UseSqlServer(
+            options.UseNpgsql(
                 configuration.GetConnectionString("DefaultConnection"),
-                sqlOptions => sqlOptions.EnableRetryOnFailure(
+                npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
                     maxRetryCount: 3,
                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null)));
+                    errorCodesToAdd: null))
+            .UseSnakeCaseNamingConvention());
 
         // Register repositories
         services.AddScoped<ILoginRepository, LoginRepository>();

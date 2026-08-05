@@ -20,6 +20,12 @@ public class ClinicDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Set default schema to "public" for PostgreSQL
+        modelBuilder.HasDefaultSchema("public");
+
+        // Enable PostgreSQL extensions
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+
         modelBuilder.ApplyConfiguration(new LoginTableConfiguration());
         modelBuilder.ApplyConfiguration(new PatientConfiguration());
         modelBuilder.ApplyConfiguration(new DoctorConfiguration());
