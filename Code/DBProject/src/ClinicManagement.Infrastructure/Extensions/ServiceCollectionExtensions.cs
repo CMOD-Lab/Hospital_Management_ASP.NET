@@ -18,9 +18,19 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string connectionString)
     {
-        // Register DbContext - using SQL Server via connection string
+        // Register DbContext - using PostgreSQL via Npgsql with snake_case naming convention
         services.AddDbContext<ClinicDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        {
+            options.UseNpgsql(connectionString, npgsqlOptions =>
+            {
+                npgsqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 3,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorCodesToAdd: null);
+                npgsqlOptions.MigrationsHistoryTable("__ef_migrations_history", "public");
+            });
+            options.UseSnakeCaseNamingConvention();
+        });
 
         // Register repositories
         services.AddScoped<ILoginRepository, LoginRepository>();
