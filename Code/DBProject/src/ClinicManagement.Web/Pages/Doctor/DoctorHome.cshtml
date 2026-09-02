@@ -1,0 +1,62 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.DoctorHomeModel
+@{
+    ViewData["Title"] = "Doctor Home";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/PendingAppointment">Pending Appointments</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/PatientHistory">Today's Patients</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/PreviousHistory">History</a></li>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="bi bi-person-circle"></i> Doctor Profile</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> @Model.DoctorInfo.Name</p>
+                <p><strong>Department:</strong> @Model.DoctorInfo.DepartmentName</p>
+                <p><strong>Phone:</strong> @Model.DoctorInfo.Phone</p>
+                <p><strong>Gender:</strong> @Model.DoctorInfo.Gender</p>
+                <p><strong>Experience:</strong> @Model.DoctorInfo.WorkExperience years</p>
+                <p><strong>Charges/Visit:</strong> @Model.DoctorInfo.ChargesPerVisit.ToString("C")</p>
+                <p><strong>Qualification:</strong> @Model.DoctorInfo.Qualification</p>
+                <p><strong>Specialization:</strong> @Model.DoctorInfo.Specialization</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5><i class="bi bi-calendar-check"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Doctor/PendingAppointment" class="btn btn-warning w-100">
+                            <i class="bi bi-clock"></i> Pending Appointments
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Doctor/PatientHistory" class="btn btn-info w-100">
+                            <i class="bi bi-people"></i> Today's Patients
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Doctor/Bill" class="btn btn-success w-100">
+                            <i class="bi bi-receipt"></i> Generate Bills
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Doctor/PreviousHistory" class="btn btn-secondary w-100">
+                            <i class="bi bi-archive"></i> Previous History
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

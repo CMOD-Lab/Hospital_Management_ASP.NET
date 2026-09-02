@@ -1,0 +1,44 @@
+@page "{appointmentId:int}"
+@model ClinicManagement.Web.Pages.Doctor.HistoryUpdateModel
+@{
+    ViewData["Title"] = "Update History";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/DoctorHome">Home</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/PatientHistory">Back</a></li>
+}
+
+<h2><i class="bi bi-pencil-square"></i> Update Patient History</h2>
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <strong>Patient:</strong> @Model.Input.PatientName |
+        <strong>Appointment ID:</strong> @Model.Input.AppointmentId
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Input.AppointmentId" />
+            <input type="hidden" asp-for="Input.DoctorId" />
+            <div class="mb-3">
+                <label asp-for="Input.Disease" class="form-label">Disease</label>
+                <input asp-for="Input.Disease" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Progress" class="form-label">Progress</label>
+                <textarea asp-for="Input.Progress" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Prescription" class="form-label">Prescription</label>
+                <textarea asp-for="Input.Prescription" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

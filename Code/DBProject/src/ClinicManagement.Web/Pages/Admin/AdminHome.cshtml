@@ -1,0 +1,91 @@
+@page
+@model ClinicManagement.Web.Pages.Admin.AdminHomeModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Admin/ManageClinic">Manage Clinic</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Admin/DoctorRegistrationForm">Add Doctor</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Admin/AddStaff">Add Staff</a></li>
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2><i class="bi bi-speedometer2"></i> Admin Dashboard</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-people"></i> Total Patients</h5>
+                <p class="card-text display-6">@Model.DashboardData.TotalPatients</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-person-badge"></i> Total Doctors</h5>
+                <p class="card-text display-6">@Model.DashboardData.TotalDoctors</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-currency-dollar"></i> Total Income</h5>
+                <p class="card-text display-6">@Model.DashboardData.TotalIncome.ToString("C")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h5>Departments</h5></div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr><th>Department</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dept in Model.DashboardData.Departments)
+                        {
+                            <tr>
+                                <td>@dept.DeptName</td>
+                                <td>@dept.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h5>Recent Appointments</h5></div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr><th>Patient</th><th>Doctor</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appt in Model.DashboardData.RecentAppointments)
+                        {
+                            <tr>
+                                <td>@appt.PatientName</td>
+                                <td>@appt.DoctorName</td>
+                                <td><span class="badge bg-info">@appt.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

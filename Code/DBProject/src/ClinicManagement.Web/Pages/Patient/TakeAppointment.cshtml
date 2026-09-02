@@ -1,0 +1,56 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.TakeAppointmentModel
+@{
+    ViewData["Title"] = "Take Appointment";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/PatientHome">Home</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/ViewDoctors">View Doctors</a></li>
+}
+
+<h2><i class="bi bi-calendar-plus"></i> Take Appointment</h2>
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form method="get">
+            <div class="row mb-3">
+                <div class="col-md-5">
+                    <label class="form-label">Select Department</label>
+                    <select name="deptName" class="form-select" onchange="this.form.submit()">
+                        <option value="">Select Department</option>
+                        @foreach (var dept in Model.Departments)
+                        {
+                            <option value="@dept.DeptName" selected="@(Model.SelectedDepartment == dept.DeptName)">
+                                @dept.DeptName
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        @if (Model.Doctors.Any())
+        {
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Select Doctor</label>
+                    <select name="doctorId" class="form-select">
+                        <option value="">Select Doctor</option>
+                        @foreach (var doc in Model.Doctors)
+                        {
+                            <option value="@doc.DoctorId">@doc.Name - @doc.ChargesPerVisit.ToString("C")/visit</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+            </form>
+        }
+    </div>
+</div>

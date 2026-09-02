@@ -1,0 +1,104 @@
+@page
+@model ClinicManagement.Web.Pages.Admin.DoctorRegistrationFormModel
+@{
+    ViewData["Title"] = "Doctor Registration";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Admin/AdminHome">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Admin/ManageClinic">Manage Clinic</a></li>
+}
+
+<h2><i class="bi bi-person-plus"></i> Doctor Registration</h2>
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="alert alert-success">@Model.SuccessMessage</div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Name" class="form-label">Full Name</label>
+                    <input asp-for="Input.Name" class="form-control" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <input asp-for="Input.Email" class="form-control" type="email" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <input asp-for="Input.Password" class="form-control" type="password" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.BirthDate" class="form-label">Date of Birth</label>
+                    <input asp-for="Input.BirthDate" class="form-control" type="date" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.DeptNo" class="form-label">Department</label>
+                    <select asp-for="Input.DeptNo" class="form-select">
+                        <option value="">Select Department</option>
+                        @foreach (var dept in Model.Departments)
+                        {
+                            <option value="@dept.DeptNo">@dept.DeptName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.Gender" class="form-label">Gender</label>
+                    <select asp-for="Input.Gender" class="form-select">
+                        <option value="">Select</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.Phone" class="form-label">Phone</label>
+                    <input asp-for="Input.Phone" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.WorkExperience" class="form-label">Work Experience (years)</label>
+                    <input asp-for="Input.WorkExperience" class="form-control" type="number" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.Salary" class="form-label">Salary</label>
+                    <input asp-for="Input.Salary" class="form-control" type="number" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Input.ChargesPerVisit" class="form-label">Charges Per Visit</label>
+                    <input asp-for="Input.ChargesPerVisit" class="form-control" type="number" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Specialization" class="form-label">Specialization</label>
+                    <input asp-for="Input.Specialization" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Input.Qualification" class="form-label">Qualification</label>
+                    <input asp-for="Input.Qualification" class="form-control" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Address" class="form-label">Address</label>
+                <textarea asp-for="Input.Address" class="form-control" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Register Doctor</button>
+        </form>
+    </div>
+</div>

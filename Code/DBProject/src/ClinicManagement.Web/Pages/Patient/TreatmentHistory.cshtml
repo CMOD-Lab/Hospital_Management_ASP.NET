@@ -1,0 +1,38 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.TreatmentHistoryModel
+@{
+    ViewData["Title"] = "Treatment History";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/PatientHome">Home</a></li>
+}
+
+<h2><i class="bi bi-clipboard2-pulse"></i> Treatment History</h2>
+<hr />
+
+@if (!Model.Treatments.Any())
+{
+    <div class="alert alert-info">No treatment history found.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr><th>ID</th><th>Doctor</th><th>Date</th><th>Disease</th><th>Progress</th><th>Prescription</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model.Treatments)
+            {
+                <tr>
+                    <td>@t.AppointmentId</td>
+                    <td>@t.DoctorName</td>
+                    <td>@t.AppointmentDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@t.Disease</td>
+                    <td>@t.Progress</td>
+                    <td>@t.Prescription</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

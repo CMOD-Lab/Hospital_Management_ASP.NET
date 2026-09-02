@@ -1,0 +1,74 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.PatientHomeModel
+@{
+    ViewData["Title"] = "Patient Home";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/ViewDoctors">View Doctors</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/TakeAppointment">Take Appointment</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/CurrentAppointment">Current Appointment</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/BillsHistory">Bills</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/TreatmentHistory">Treatment History</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/PatientNotifications">Notifications</a></li>
+    <li class="nav-item"><a class="nav-link" asp-page="/Patient/PatientFeedback">Feedback</a></li>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5><i class="bi bi-person-circle"></i> My Profile</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> @Model.PatientInfo.Name</p>
+                <p><strong>Phone:</strong> @Model.PatientInfo.Phone</p>
+                <p><strong>Address:</strong> @Model.PatientInfo.Address</p>
+                <p><strong>Date of Birth:</strong> @Model.PatientInfo.BirthDate</p>
+                <p><strong>Age:</strong> @Model.PatientInfo.Age years</p>
+                <p><strong>Gender:</strong> @Model.PatientInfo.Gender</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="bi bi-grid"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/ViewDoctors" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-person-badge"></i> View Doctors
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/TakeAppointment" class="btn btn-outline-success w-100">
+                            <i class="bi bi-calendar-plus"></i> Take Appointment
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/CurrentAppointment" class="btn btn-outline-info w-100">
+                            <i class="bi bi-calendar-check"></i> Current Appointment
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/BillsHistory" class="btn btn-outline-warning w-100">
+                            <i class="bi bi-receipt"></i> Bills History
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/TreatmentHistory" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-clipboard2-pulse"></i> Treatment History
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-page="/Patient/PatientNotifications" class="btn btn-outline-danger w-100">
+                            <i class="bi bi-bell"></i> Notifications
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

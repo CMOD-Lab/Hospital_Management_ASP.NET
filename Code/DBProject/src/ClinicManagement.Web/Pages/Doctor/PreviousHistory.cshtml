@@ -1,0 +1,38 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.PreviousHistoryModel
+@{
+    ViewData["Title"] = "Previous History";
+}
+
+@section NavItems {
+    <li class="nav-item"><a class="nav-link" asp-page="/Doctor/DoctorHome">Home</a></li>
+}
+
+<h2><i class="bi bi-archive"></i> Previous Patient History</h2>
+<hr />
+
+@if (!Model.History.Any())
+{
+    <div class="alert alert-info">No previous history found.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr><th>ID</th><th>Patient</th><th>Date</th><th>Disease</th><th>Prescription</th><th>Bill</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var h in Model.History)
+            {
+                <tr>
+                    <td>@h.AppointmentId</td>
+                    <td>@h.PatientName</td>
+                    <td>@h.AppointmentDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@h.Disease</td>
+                    <td>@h.Prescription</td>
+                    <td><span class="badge @(h.BillStatus == "Paid" ? "bg-success" : "bg-warning")">@h.BillStatus</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
