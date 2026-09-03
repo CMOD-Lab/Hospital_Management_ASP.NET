@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "fH90jAPeCkc=",
+  "success": true,
+  "projectFilePath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj",
+  "expectedPackageFiles": [
+    "/app/.nuget/packages/microsoft.netcore.app.ref/8.0.16/microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
+    "/app/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.16/microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}

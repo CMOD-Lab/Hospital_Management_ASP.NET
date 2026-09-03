@@ -1,0 +1,61 @@
+@page
+@model CareTrack.Web.Pages.Patient.DoctorProfileModel
+@{
+    ViewData["Title"] = "Doctor Profile";
+    Layout = "_PatientLayout";
+}
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-user-md me-2"></i>Doctor Profile</h2>
+
+    @if (Model.Doctor != null)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <i class="fas fa-user-md fa-5x text-success mb-3"></i>
+                        <h4>@Model.Doctor.Name</h4>
+                        <p class="text-muted">@Model.Doctor.Specialization</p>
+                        <p><span class="badge bg-info">@(Model.Doctor.Department?.DeptName ?? "N/A")</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card shadow mb-3">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Doctor Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Phone:</strong> @(Model.Doctor.Phone ?? "N/A")</p>
+                                <p><strong>Gender:</strong> @(Model.Doctor.Gender == "M" ? "Male" : "Female")</p>
+                                <p><strong>Qualification:</strong> @Model.Doctor.Qualification</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Experience:</strong> @(Model.Doctor.WorkExperience ?? 0) years</p>
+                                <p><strong>Charges/Visit:</strong> $@Model.Doctor.ChargesPerVisit</p>
+                                <p><strong>Patients Treated:</strong> @Model.Doctor.PatientsTreated</p>
+                                <p><strong>Repute Index:</strong> @(Model.Doctor.ReputeIndex?.ToString("F2") ?? "N/A")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/Patient/AppointmentTaker?doctorId=@Model.Doctor.DoctorId" class="btn btn-primary">
+                    <i class="fas fa-calendar-plus me-2"></i>Book Appointment
+                </a>
+                <a href="/Patient/ViewDoctors" class="btn btn-secondary ms-2">
+                    <i class="fas fa-arrow-left me-2"></i>Back
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>Doctor not found.
+        </div>
+    }
+</div>

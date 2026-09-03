@@ -1,0 +1,114 @@
+@page
+@model CareTrack.Web.Pages.Doctor.HistoryUpdateModel
+@{
+    ViewData["Title"] = "Update Patient History";
+    Layout = "_DoctorLayout";
+}
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-edit me-2"></i>Update Patient History</h2>
+
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
+            @Model.StatusMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Today's Appointments</h5>
+        </div>
+        <div class="card-body">
+            @if (!Model.TodaysAppointments.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>No appointments for today.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Appointment ID</th>
+                                <th>Patient</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var appt in Model.TodaysAppointments)
+                            {
+                                <tr>
+                                    <td>@appt.AppointId</td>
+                                    <td>@(appt.Patient?.Name ?? "Unknown")</td>
+                                    <td>@(appt.Date?.ToString("HH:mm") ?? "N/A")</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                data-appoint-id="@appt.AppointId"
+                                                data-disease="@appt.Disease"
+                                                data-progress="@appt.Progress"
+                                                data-prescription="@appt.Prescription">
+                                            <i class="fas fa-edit"></i> Update
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Update Prescription</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="appointmentId" name="appointmentId" />
+                    <div class="mb-3">
+                        <label for="disease" class="form-label">Disease</label>
+                        <input type="text" class="form-control" id="disease" name="disease" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="progress" class="form-label">Progress</label>
+                        <textarea class="form-control" id="progress" name="progress" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prescription" class="form-label">Prescription</label>
+                        <textarea class="form-control" id="prescription" name="prescription" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i>Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('updateModal').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            document.getElementById('appointmentId').value = button.getAttribute('data-appoint-id');
+            document.getElementById('disease').value = button.getAttribute('data-disease') || '';
+            document.getElementById('progress').value = button.getAttribute('data-progress') || '';
+            document.getElementById('prescription').value = button.getAttribute('data-prescription') || '';
+        });
+    </script>
+}

@@ -1,0 +1,16 @@
+using CareTrack.Domain.Entities;
+
+namespace CareTrack.Domain.Interfaces.Repositories;
+
+/// <summary>
+/// Repository interface for Patient data access.
+/// </summary>
+public interface IPatientRepository
+{
+    Task<Patient?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Patient>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<Patient>> SearchAsync(string searchQuery, CancellationToken cancellationToken = default);
+    Task<Patient> AddAsync(Patient patient, CancellationToken cancellationToken = default);
+    Task UpdateAsync(Patient patient, CancellationToken cancellationToken = default);
+    Task<bool> ExistsAsync(int id, CancellationToken cancellationToken = default);
+}

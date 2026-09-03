@@ -1,0 +1,184 @@
+@page
+@model CareTrack.Web.Pages.Admin.ManageClinicModel
+@{
+    ViewData["Title"] = "Manage Clinic";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <h2 class="mb-4"><i class="fas fa-clinic-medical me-2"></i>Manage Clinic</h2>
+
+    <!-- Search and Tabs -->
+    <ul class="nav nav-tabs mb-3" id="manageTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="doctors-tab" data-bs-toggle="tab" data-bs-target="#doctors" type="button">
+                <i class="fas fa-user-md me-1"></i>Doctors
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="patients-tab" data-bs-toggle="tab" data-bs-target="#patients" type="button">
+                <i class="fas fa-users me-1"></i>Patients
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="staff-tab" data-bs-toggle="tab" data-bs-target="#staff" type="button">
+                <i class="fas fa-id-badge me-1"></i>Staff
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="manageTabsContent">
+        <!-- Doctors Tab -->
+        <div class="tab-pane fade show active" id="doctors" role="tabpanel">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Doctors List</h5>
+                    <form method="get" class="d-flex">
+                        <input type="hidden" name="activeTab" value="doctors" />
+                        <input type="text" class="form-control me-2" name="doctorSearch"
+                               value="@Model.DoctorSearch" placeholder="Search doctors..." />
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var doctor in Model.Doctors)
+                                {
+                                    <tr>
+                                        <td>@doctor.DoctorId</td>
+                                        <td>@doctor.Name</td>
+                                        <td>@(doctor.Department?.DeptName ?? "N/A")</td>
+                                        <td>
+                                            <form method="post" asp-page-handler="DeleteDoctor" class="d-inline">
+                                                <input type="hidden" name="doctorId" value="@doctor.DoctorId" />
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to remove this doctor?')">
+                                                    <i class="fas fa-trash"></i> Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patients Tab -->
+        <div class="tab-pane fade" id="patients" role="tabpanel">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Patients List</h5>
+                    <form method="get" class="d-flex">
+                        <input type="hidden" name="activeTab" value="patients" />
+                        <input type="text" class="form-control me-2" name="patientSearch"
+                               value="@Model.PatientSearch" placeholder="Search patients..." />
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var patient in Model.Patients)
+                                {
+                                    <tr>
+                                        <td>@patient.PatientId</td>
+                                        <td>@patient.Name</td>
+                                        <td>@patient.Phone</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Tab -->
+        <div class="tab-pane fade" id="staff" role="tabpanel">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Staff List</h5>
+                    <form method="get" class="d-flex">
+                        <input type="hidden" name="activeTab" value="staff" />
+                        <input type="text" class="form-control me-2" name="staffSearch"
+                               value="@Model.StaffSearch" placeholder="Search staff..." />
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var staff in Model.Staff)
+                                {
+                                    <tr>
+                                        <td>@staff.StaffId</td>
+                                        <td>@staff.Name</td>
+                                        <td>@staff.Designation</td>
+                                        <td>
+                                            <form method="post" asp-page-handler="DeleteStaff" class="d-inline">
+                                                <input type="hidden" name="staffId" value="@staff.StaffId" />
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to remove this staff member?')">
+                                                    <i class="fas fa-trash"></i> Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Activate the correct tab based on query parameter
+        const activeTab = '@Model.ActiveTab';
+        if (activeTab) {
+            const tab = document.getElementById(activeTab + '-tab');
+            if (tab) {
+                new bootstrap.Tab(tab).show();
+            }
+        }
+    </script>
+}

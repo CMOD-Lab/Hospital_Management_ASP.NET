@@ -1,0 +1,83 @@
+@page
+@model CareTrack.Web.Pages.Patient.PatientHomeModel
+@{
+    ViewData["Title"] = "Patient Home";
+    Layout = "_PatientLayout";
+}
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-user-injured me-2"></i>Patient Profile</h2>
+
+    @if (Model.Patient != null)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <i class="fas fa-user-circle fa-5x text-info mb-3"></i>
+                        <h4>@Model.Patient.Name</h4>
+                        <p class="text-muted">@(Model.Patient.Gender == "M" ? "Male" : "Female")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Personal Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Phone:</strong> @(Model.Patient.Phone ?? "N/A")</p>
+                                <p><strong>Address:</strong> @(Model.Patient.Address ?? "N/A")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Birth Date:</strong> @Model.Patient.BirthDate.ToString("yyyy-MM-dd")</p>
+                                <p><strong>Gender:</strong> @(Model.Patient.Gender == "M" ? "Male" : "Female")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <a href="/Patient/ViewDoctors" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-user-md me-2"></i>View Doctors
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/Patient/CurrentAppointment" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-calendar-check me-2"></i>Current Appointment
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/Patient/TreatmentHistory" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-notes-medical me-2"></i>Treatment History
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/Patient/BillsHistory" class="btn btn-warning w-100 mb-2">
+                            <i class="fas fa-receipt me-2"></i>Bills History
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/Patient/PatientNotifications" class="btn btn-secondary w-100 mb-2">
+                            <i class="fas fa-bell me-2"></i>Notifications
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/Patient/PatientFeedback" class="btn btn-danger w-100 mb-2">
+                            <i class="fas fa-comment me-2"></i>Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>Error loading patient information.
+        </div>
+    }
+</div>
