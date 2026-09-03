@@ -10,21 +10,23 @@
         "projectUniqueName": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj",
         "projectName": "CareTrack.Domain",
         "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj",
-        "packagesPath": "/app/.nuget/packages/",
+        "packagesPath": "/app/.nuget/packages",
         "outputPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/NuGet.config",
           "/app/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
+          "/app/.nuget/packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +43,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
@@ -54,16 +56,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

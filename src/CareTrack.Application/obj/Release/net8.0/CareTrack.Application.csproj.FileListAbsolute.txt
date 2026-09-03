@@ -1,0 +1,16 @@
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/bin/Release/net8.0/CareTrack.Application.deps.json
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/bin/Release/net8.0/CareTrack.Application.dll
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/bin/Release/net8.0/CareTrack.Application.pdb
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/bin/Release/net8.0/CareTrack.Domain.dll
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/bin/Release/net8.0/CareTrack.Domain.pdb
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.csproj.AssemblyReference.cache
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.GeneratedMSBuildEditorConfig.editorconfig
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.AssemblyInfoInputs.cache
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.AssemblyInfo.cs
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.csproj.CoreCompileInputs.cache
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.sourcelink.json
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrac.FB82FF58.Up2Date
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.dll
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/refint/CareTrack.Application.dll
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/CareTrack.Application.pdb
+/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/Release/net8.0/ref/CareTrack.Application.dll

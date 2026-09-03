@@ -10,21 +10,23 @@
         "projectUniqueName": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/CareTrack.Application.csproj",
         "projectName": "CareTrack.Application",
         "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/CareTrack.Application.csproj",
-        "packagesPath": "/app/.nuget/packages/",
+        "packagesPath": "/app/.nuget/packages",
         "outputPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/NuGet.config",
           "/app/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
+          "/app/.nuget/packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {
               "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj": {
                 "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj"
@@ -45,8 +47,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "FluentValidation": {
               "target": "Package",
@@ -54,11 +56,11 @@
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -72,16 +74,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -97,21 +89,23 @@
         "projectUniqueName": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj",
         "projectName": "CareTrack.Domain",
         "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/CareTrack.Domain.csproj",
-        "packagesPath": "/app/.nuget/packages/",
+        "packagesPath": "/app/.nuget/packages",
         "outputPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/NuGet.config",
           "/app/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
+          "/app/.nuget/packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -128,8 +122,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
@@ -141,16 +135,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -166,21 +150,23 @@
         "projectUniqueName": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Infrastructure/CareTrack.Infrastructure.csproj",
         "projectName": "CareTrack.Infrastructure",
         "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Infrastructure/CareTrack.Infrastructure.csproj",
-        "packagesPath": "/app/.nuget/packages/",
+        "packagesPath": "/app/.nuget/packages",
         "outputPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/NuGet.config",
           "/app/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
+          "/app/.nuget/packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {
               "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/CareTrack.Application.csproj": {
                 "projectPath": "/modernize-data/studio-data/TNT1001/APP846949/transformed-code/149/studio-workspace/CareTrack/src/CareTrack.Application/CareTrack.Application.csproj"
@@ -204,26 +190,34 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "EFCore.NamingConventions": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -237,16 +231,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
