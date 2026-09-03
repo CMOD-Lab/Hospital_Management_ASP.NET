@@ -18,15 +18,19 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string connectionString)
     {
-        // Register DbContext
+        // Register DbContext with PostgreSQL provider
         services.AddDbContext<CareTrackDbContext>(options =>
-            options.UseSqlServer(connectionString, sqlOptions =>
+        {
+            options.UseNpgsql(connectionString, npgsqlOptions =>
             {
-                sqlOptions.EnableRetryOnFailure(
+                npgsqlOptions.EnableRetryOnFailure(
                     maxRetryCount: 3,
                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null);
-            }));
+                    errorCodesToAdd: null);
+                npgsqlOptions.MigrationsHistoryTable("__ef_migrations_history", "public");
+            });
+            options.UseSnakeCaseNamingConvention();
+        });
 
         // Register repositories
         services.AddScoped<IAuthRepository, AuthRepository>();

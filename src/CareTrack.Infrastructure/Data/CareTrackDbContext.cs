@@ -5,6 +5,7 @@ namespace CareTrack.Infrastructure.Data;
 
 /// <summary>
 /// Entity Framework Core database context for the CareTrack application.
+/// Configured for PostgreSQL with snake_case naming conventions.
 /// </summary>
 public class CareTrackDbContext : DbContext
 {
@@ -22,6 +23,12 @@ public class CareTrackDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // Set default schema to "public" for PostgreSQL
+        modelBuilder.HasDefaultSchema("public");
+
+        // Configure PostgreSQL extensions
+        modelBuilder.HasPostgresExtension("uuid-ossp");
 
         // Apply all entity configurations from this assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(CareTrackDbContext).Assembly);
