@@ -1,0 +1,42 @@
+/* Clinic Management System - Site CSS */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.btn {
+    border-radius: 6px;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}

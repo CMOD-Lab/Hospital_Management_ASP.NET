@@ -1,0 +1,101 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.PatientHomeModel
+@{
+    ViewData["Title"] = "Patient Home";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-home me-2"></i>Welcome, @Model.PatientName!</h2>
+</div>
+
+<!-- Patient Info Card -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-user me-2"></i>My Profile</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr><th>Name:</th><td>@Model.PatientName</td></tr>
+                    <tr><th>Phone:</th><td>@Model.Phone</td></tr>
+                    <tr><th>Address:</th><td>@Model.Address</td></tr>
+                    <tr><th>Birth Date:</th><td>@Model.BirthDate</td></tr>
+                    <tr><th>Gender:</th><td>@(Model.Gender == "M" ? "Male" : "Female")</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Appointment -->
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-calendar-check me-2"></i>Current Appointment</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.HasCurrentAppointment)
+                {
+                    <p><strong>Doctor:</strong> @Model.CurrentDoctorName</p>
+                    <p><strong>Timings:</strong> @Model.CurrentTimings</p>
+                }
+                else
+                {
+                    <p class="text-muted">No current appointment.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Cards -->
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/ViewDoctors" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-primary">
+                <i class="fas fa-user-md fa-3x text-primary mb-2"></i>
+                <h6>View Doctors</h6>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/TakeAppointment" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-success">
+                <i class="fas fa-calendar-plus fa-3x text-success mb-2"></i>
+                <h6>Take Appointment</h6>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/BillsHistory" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-warning">
+                <i class="fas fa-file-invoice-dollar fa-3x text-warning mb-2"></i>
+                <h6>Bills History</h6>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/TreatmentHistory" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-info">
+                <i class="fas fa-notes-medical fa-3x text-info mb-2"></i>
+                <h6>Treatment History</h6>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/PatientNotifications" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-danger">
+                <i class="fas fa-bell fa-3x text-danger mb-2"></i>
+                <h6>Notifications</h6>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a asp-page="/Patient/PatientFeedback" class="text-decoration-none">
+            <div class="card shadow text-center p-3 h-100 border-secondary">
+                <i class="fas fa-star fa-3x text-secondary mb-2"></i>
+                <h6>Feedback</h6>
+            </div>
+        </a>
+    </div>
+</div>

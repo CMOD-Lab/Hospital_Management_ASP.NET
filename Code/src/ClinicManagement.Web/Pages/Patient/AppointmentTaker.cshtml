@@ -1,0 +1,63 @@
+@page "{doctorId:int}"
+@model ClinicManagement.Web.Pages.Patient.AppointmentTakerModel
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-calendar-check me-2"></i>Book Appointment</h2>
+    <a asp-page="/Patient/TakeAppointment" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back
+    </a>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<div class="card shadow">
+    <div class="card-header bg-success text-white">
+        <h5 class="mb-0">Available Time Slots</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.FreeSlots.Any())
+        {
+            <form method="post">
+                <input type="hidden" name="doctorId" value="@Model.DoctorId" />
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Time Slot</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.FreeSlots.Count(); i++)
+                            {
+                                var slot = Model.FreeSlots.ElementAt(i);
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@slot.Timings</td>
+                                    <td>
+                                        <button type="submit" name="slotIndex" value="@i" class="btn btn-sm btn-success">
+                                            <i class="fas fa-check me-1"></i>Book This Slot
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>No free slots available for this doctor.
+            </div>
+        }
+    </div>
+</div>
