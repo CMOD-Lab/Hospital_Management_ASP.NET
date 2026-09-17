@@ -1,5 +1,5 @@
 using System.Data;
-using System.Data.SqlClient;
+using Npgsql;
 using ClinicManagement.Domain.Entities;
 using ClinicManagement.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
@@ -27,21 +27,21 @@ public class PatientService : IPatientService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrievePatientData", con)
+            await using var cmd = new NpgsqlCommand("RetrievePatientData", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@name", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@phone", SqlDbType.Char, 15).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@birthDate", SqlDbType.VarChar, 10).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@address", SqlDbType.VarChar, 40).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@age", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@gender", SqlDbType.Char, 1).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@id", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@name", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@phone", NpgsqlTypes.NpgsqlDbType.Char).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@birthDate", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@address", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@age", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@gender", NpgsqlTypes.NpgsqlDbType.Char).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
@@ -55,9 +55,9 @@ public class PatientService : IPatientService
                 Gender = cmd.Parameters["@gender"].Value?.ToString() ?? string.Empty
             };
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving patient {PatientId}", patientId);
             return null;
         }
     }
@@ -68,14 +68,14 @@ public class PatientService : IPatientService
         var patients = new List<Patient>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
             string sql = string.IsNullOrEmpty(searchQuery)
                 ? "SELECT * FROM PATIENT_VIEW"
-                : "SELECT Patient.PatientID, Patient.Name, Patient.Phone FROM Patient WHERE patient.name LIKE '%' + @SName + '%'";
+                : "SELECT Patient.PatientID, Patient.Name, Patient.Phone FROM Patient WHERE patient.name LIKE '%' || @SName || '%'";
 
-            await using var cmd = new SqlCommand(sql, con);
+            await using var cmd = new NpgsqlCommand(sql, con);
             if (!string.IsNullOrEmpty(searchQuery))
                 cmd.Parameters.AddWithValue("@SName", searchQuery.Trim());
 
@@ -90,9 +90,9 @@ public class PatientService : IPatientService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving all patients");
+            _logger.LogError(ex, "PostgreSQL error retrieving all patients");
         }
         return patients;
     }
@@ -103,15 +103,15 @@ public class PatientService : IPatientService
         var bills = new List<Bill>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrieveBillHistory", con)
+            await using var cmd = new NpgsqlCommand("RetrieveBillHistory", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@pId", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@pId", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             int rowIndex = 0;
@@ -128,9 +128,9 @@ public class PatientService : IPatientService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving bill history for patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving bill history for patient {PatientId}", patientId);
         }
         return bills;
     }
@@ -141,15 +141,15 @@ public class PatientService : IPatientService
         var history = new List<TreatmentHistory>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrieveTreatmentHistory", con)
+            await using var cmd = new NpgsqlCommand("RetrieveTreatmentHistory", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@pId", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@pId", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             int rowIndex = 0;
@@ -167,9 +167,9 @@ public class PatientService : IPatientService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving treatment history for patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving treatment history for patient {PatientId}", patientId);
         }
         return history;
     }
@@ -179,21 +179,21 @@ public class PatientService : IPatientService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrieveCurrentAppointment", con)
+            await using var cmd = new NpgsqlCommand("RetrieveCurrentAppointment", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@pid", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@timings", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@dName", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@pid", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@timings", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@dName", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
-            int count = (int)cmd.Parameters["@count"].Value;
+            int count = (int)cmd.Parameters["@count"].Value!;
             if (count == 0) return null;
 
             return new Appointment
@@ -203,9 +203,9 @@ public class PatientService : IPatientService
                 Timings = cmd.Parameters["@timings"].Value?.ToString() ?? string.Empty
             };
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving current appointment for patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving current appointment for patient {PatientId}", patientId);
             return null;
         }
     }
@@ -216,21 +216,21 @@ public class PatientService : IPatientService
         var notifications = new List<Appointment>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrievePatientNotifications", con)
+            await using var cmd = new NpgsqlCommand("RetrievePatientNotifications", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@pId", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@timings", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@dName", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@pId", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@timings", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@dName", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
-            int count = (int)cmd.Parameters["@count"].Value;
+            int count = (int)cmd.Parameters["@count"].Value!;
             if (count > 0)
             {
                 notifications.Add(new Appointment
@@ -241,9 +241,9 @@ public class PatientService : IPatientService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving notifications for patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving notifications for patient {PatientId}", patientId);
         }
         return notifications;
     }
@@ -253,36 +253,36 @@ public class PatientService : IPatientService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrievePendingFeedback", con)
+            await using var cmd = new NpgsqlCommand("RetrievePendingFeedback", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@pId", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@timings", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@dName", SqlDbType.VarChar, 30).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@aID", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@pId", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@timings", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@dName", NpgsqlTypes.NpgsqlDbType.Varchar).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@aID", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
-            int count = (int)cmd.Parameters["@count"].Value;
+            int count = (int)cmd.Parameters["@count"].Value!;
             if (count == 0) return (false, null);
 
             var appointment = new Appointment
             {
-                AppointmentId = (int)cmd.Parameters["@aID"].Value,
+                AppointmentId = (int)cmd.Parameters["@aID"].Value!,
                 PatientId = patientId,
                 DoctorName = cmd.Parameters["@dName"].Value?.ToString() ?? string.Empty,
                 Timings = cmd.Parameters["@timings"].Value?.ToString() ?? string.Empty
             };
             return (true, appointment);
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving pending feedback for patient {PatientId}", patientId);
+            _logger.LogError(ex, "PostgreSQL error retrieving pending feedback for patient {PatientId}", patientId);
             return (false, null);
         }
     }
@@ -292,21 +292,21 @@ public class PatientService : IPatientService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("storeFeedback", con)
+            await using var cmd = new NpgsqlCommand("storeFeedback", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@aId", SqlDbType.Int).Value = appointmentId;
+            cmd.Parameters.Add("@aId", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error submitting feedback for appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error submitting feedback for appointment {AppointmentId}", appointmentId);
             return false;
         }
     }

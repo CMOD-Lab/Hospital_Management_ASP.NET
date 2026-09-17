@@ -1,5 +1,5 @@
 using System.Data;
-using System.Data.SqlClient;
+using Npgsql;
 using ClinicManagement.Domain.Entities;
 using ClinicManagement.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
@@ -27,14 +27,14 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("Doctor_Information_By_ID1", con)
+            await using var cmd = new NpgsqlCommand("Doctor_Information_By_ID1", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = doctorId;
+            cmd.Parameters.Add("@ID", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             if (await reader.ReadAsync(cancellationToken))
@@ -51,9 +51,9 @@ public class DoctorService : IDoctorService
             }
             return null;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error retrieving doctor {DoctorId}", doctorId);
             return null;
         }
     }
@@ -64,14 +64,14 @@ public class DoctorService : IDoctorService
         var doctors = new List<Doctor>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
             string sql = string.IsNullOrEmpty(searchQuery)
                 ? "SELECT Doctor.DoctorID as ID, Doctor.Name, D.DeptName as Department FROM Doctor JOIN Department D ON D.DeptNo = Doctor.DeptNo WHERE Doctor.Status = 1"
-                : "SELECT a.DoctorID as ID, a.Name, D.DeptName as Department FROM department D join (SELECT * FROM Doctor WHERE Doctor.Status = 1 AND Doctor.Name like '%' + @DName + '%') a ON a.DeptNo = D.DeptNo";
+                : "SELECT a.DoctorID as ID, a.Name, D.DeptName as Department FROM department D join (SELECT * FROM Doctor WHERE Doctor.Status = 1 AND Doctor.Name LIKE '%' || @DName || '%') a ON a.DeptNo = D.DeptNo";
 
-            await using var cmd = new SqlCommand(sql, con);
+            await using var cmd = new NpgsqlCommand(sql, con);
             if (!string.IsNullOrEmpty(searchQuery))
                 cmd.Parameters.AddWithValue("@DName", searchQuery);
 
@@ -86,9 +86,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving all doctors");
+            _logger.LogError(ex, "PostgreSQL error retrieving all doctors");
         }
         return doctors;
     }
@@ -99,14 +99,14 @@ public class DoctorService : IDoctorService
         var doctors = new List<Doctor>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrieveDeptDoctorInfo", con)
+            await using var cmd = new NpgsqlCommand("RetrieveDeptDoctorInfo", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@deptName", SqlDbType.VarChar, 30).Value = deptName;
+            cmd.Parameters.Add("@deptName", NpgsqlTypes.NpgsqlDbType.Varchar).Value = deptName;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
@@ -121,9 +121,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving doctors for department {DeptName}", deptName);
+            _logger.LogError(ex, "PostgreSQL error retrieving doctors for department {DeptName}", deptName);
         }
         return doctors;
     }
@@ -134,14 +134,14 @@ public class DoctorService : IDoctorService
         var appointments = new List<Appointment>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("PENDING_APPOINTMENTS2", con)
+            await using var cmd = new NpgsqlCommand("PENDING_APPOINTMENTS2", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@DOCTOR_ID", SqlDbType.Int).Value = doctorId;
+            cmd.Parameters.Add("@DOCTOR_ID", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
@@ -155,9 +155,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving pending appointments for doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error retrieving pending appointments for doctor {DoctorId}", doctorId);
         }
         return appointments;
     }
@@ -168,14 +168,14 @@ public class DoctorService : IDoctorService
         var appointments = new List<Appointment>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("TODAYS_APPOINTMENTS", con)
+            await using var cmd = new NpgsqlCommand("TODAYS_APPOINTMENTS", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@DOC_ID", SqlDbType.Int).Value = doctorId;
+            cmd.Parameters.Add("@DOC_ID", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
@@ -189,9 +189,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving today's appointments for doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error retrieving today's appointments for doctor {DoctorId}", doctorId);
         }
         return appointments;
     }
@@ -202,14 +202,14 @@ public class DoctorService : IDoctorService
         var history = new List<Appointment>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrievePHistory", con)
+            await using var cmd = new NpgsqlCommand("RetrievePHistory", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@dId", SqlDbType.Int).Value = doctorId;
+            cmd.Parameters.Add("@dId", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             while (await reader.ReadAsync(cancellationToken))
@@ -226,9 +226,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving patient history for doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error retrieving patient history for doctor {DoctorId}", doctorId);
         }
         return history;
     }
@@ -238,21 +238,21 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("APPROVE_APPOINTMENT", con)
+            await using var cmd = new NpgsqlCommand("APPROVE_APPOINTMENT", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@APPOINT_ID", SqlDbType.Int).Value = appointmentId;
+            cmd.Parameters.Add("@APPOINT_ID", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error approving appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error approving appointment {AppointmentId}", appointmentId);
             return false;
         }
     }
@@ -262,21 +262,21 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("delete_APPOINTMENT", con)
+            await using var cmd = new NpgsqlCommand("delete_APPOINTMENT", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@APPOINT_ID", SqlDbType.Int).Value = appointmentId;
+            cmd.Parameters.Add("@APPOINT_ID", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error deleting appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error deleting appointment {AppointmentId}", appointmentId);
             return false;
         }
     }
@@ -286,25 +286,25 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("UpdatePrescription", con)
+            await using var cmd = new NpgsqlCommand("UpdatePrescription", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@docId", SqlDbType.Int).Value = doctorId;
-            cmd.Parameters.Add("@appointid", SqlDbType.Int).Value = appointmentId;
-            cmd.Parameters.Add("@Disease", SqlDbType.VarChar, 30).Value = disease;
-            cmd.Parameters.Add("@progress", SqlDbType.VarChar, 50).Value = progress;
-            cmd.Parameters.Add("@prescription", SqlDbType.VarChar, 60).Value = prescription;
+            cmd.Parameters.Add("@docId", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
+            cmd.Parameters.Add("@appointid", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
+            cmd.Parameters.Add("@Disease", NpgsqlTypes.NpgsqlDbType.Varchar).Value = disease;
+            cmd.Parameters.Add("@progress", NpgsqlTypes.NpgsqlDbType.Varchar).Value = progress;
+            cmd.Parameters.Add("@prescription", NpgsqlTypes.NpgsqlDbType.Varchar).Value = prescription;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error updating prescription for appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error updating prescription for appointment {AppointmentId}", appointmentId);
             return false;
         }
     }
@@ -315,14 +315,14 @@ public class DoctorService : IDoctorService
         var bills = new List<Bill>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("generate_bill", con)
+            await using var cmd = new NpgsqlCommand("generate_bill", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@dId", SqlDbType.Int).Value = doctorId;
+            cmd.Parameters.Add("@dId", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             int rowIndex = 0;
@@ -339,9 +339,9 @@ public class DoctorService : IDoctorService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error generating bills for doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error generating bills for doctor {DoctorId}", doctorId);
         }
         return bills;
     }
@@ -351,22 +351,22 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("finishedPaid", con)
+            await using var cmd = new NpgsqlCommand("finishedPaid", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@docId", SqlDbType.Int).Value = doctorId;
-            cmd.Parameters.Add("@appointid", SqlDbType.Int).Value = appointmentId;
+            cmd.Parameters.Add("@docId", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
+            cmd.Parameters.Add("@appointid", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error marking bill paid for appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error marking bill paid for appointment {AppointmentId}", appointmentId);
             return false;
         }
     }
@@ -376,22 +376,22 @@ public class DoctorService : IDoctorService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("finishedUnPaid", con)
+            await using var cmd = new NpgsqlCommand("finishedUnPaid", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@docId", SqlDbType.Int).Value = doctorId;
-            cmd.Parameters.Add("@appointid", SqlDbType.Int).Value = appointmentId;
+            cmd.Parameters.Add("@docId", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
+            cmd.Parameters.Add("@appointid", NpgsqlTypes.NpgsqlDbType.Integer).Value = appointmentId;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return true;
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error marking bill unpaid for appointment {AppointmentId}", appointmentId);
+            _logger.LogError(ex, "PostgreSQL error marking bill unpaid for appointment {AppointmentId}", appointmentId);
             return false;
         }
     }

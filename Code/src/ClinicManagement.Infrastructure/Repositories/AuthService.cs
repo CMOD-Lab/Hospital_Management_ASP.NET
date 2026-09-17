@@ -1,5 +1,5 @@
 using System.Data;
-using System.Data.SqlClient;
+using Npgsql;
 using AutoMapper;
 using ClinicManagement.Application.DTOs;
 using ClinicManagement.Domain.Entities;
@@ -32,31 +32,31 @@ public class AuthService : IAuthService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("Login", con)
+            await using var cmd = new NpgsqlCommand("Login", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add("@email", SqlDbType.VarChar, 30).Value = email;
-            cmd.Parameters.Add("@password", SqlDbType.VarChar, 20).Value = password;
-            cmd.Parameters.Add("@status", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@type", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@email", NpgsqlTypes.NpgsqlDbType.Varchar).Value = email;
+            cmd.Parameters.Add("@password", NpgsqlTypes.NpgsqlDbType.Varchar).Value = password;
+            cmd.Parameters.Add("@status", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@ID", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@type", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
-            int status = (int)cmd.Parameters["@status"].Value;
-            int type = (int)cmd.Parameters["@type"].Value;
-            int id = (int)cmd.Parameters["@ID"].Value;
+            int status = (int)cmd.Parameters["@status"].Value!;
+            int type = (int)cmd.Parameters["@type"].Value!;
+            int id = (int)cmd.Parameters["@ID"].Value!;
 
             return (status, (UserType)type, id);
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error during login for email {Email}", email);
+            _logger.LogError(ex, "PostgreSQL error during login for email {Email}", email);
             return (-1, UserType.Patient, 0);
         }
     }
@@ -68,34 +68,34 @@ public class AuthService : IAuthService
     {
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("PatientSignup", con)
+            await using var cmd = new NpgsqlCommand("PatientSignup", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add("@name", SqlDbType.VarChar, 20).Value = name;
-            cmd.Parameters.Add("@address", SqlDbType.VarChar, 40).Value = address;
-            cmd.Parameters.Add("@gender", SqlDbType.VarChar, 1).Value = gender;
-            cmd.Parameters.Add("@date", SqlDbType.Date).Value = birthDate;
-            cmd.Parameters.Add("@email", SqlDbType.VarChar, 30).Value = email;
-            cmd.Parameters.Add("@password", SqlDbType.VarChar, 20).Value = password;
-            cmd.Parameters.Add("@phone", SqlDbType.Char, 15).Value = phone;
-            cmd.Parameters.Add("@status", SqlDbType.Int).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@name", NpgsqlTypes.NpgsqlDbType.Varchar).Value = name;
+            cmd.Parameters.Add("@address", NpgsqlTypes.NpgsqlDbType.Varchar).Value = address;
+            cmd.Parameters.Add("@gender", NpgsqlTypes.NpgsqlDbType.Varchar).Value = gender;
+            cmd.Parameters.Add("@date", NpgsqlTypes.NpgsqlDbType.Date).Value = DateOnly.Parse(birthDate);
+            cmd.Parameters.Add("@email", NpgsqlTypes.NpgsqlDbType.Varchar).Value = email;
+            cmd.Parameters.Add("@password", NpgsqlTypes.NpgsqlDbType.Varchar).Value = password;
+            cmd.Parameters.Add("@phone", NpgsqlTypes.NpgsqlDbType.Char).Value = phone;
+            cmd.Parameters.Add("@status", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@ID", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
 
-            int status = (int)cmd.Parameters["@status"].Value;
-            int id = status != 0 ? (int)cmd.Parameters["@ID"].Value : 0;
+            int status = (int)cmd.Parameters["@status"].Value!;
+            int id = status != 0 ? (int)cmd.Parameters["@ID"].Value! : 0;
 
             return (status, id);
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error during patient registration for email {Email}", email);
+            _logger.LogError(ex, "PostgreSQL error during patient registration for email {Email}", email);
             return (-1, 0);
         }
     }

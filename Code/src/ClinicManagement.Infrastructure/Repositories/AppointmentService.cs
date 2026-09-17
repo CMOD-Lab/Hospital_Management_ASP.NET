@@ -1,5 +1,5 @@
 using System.Data;
-using System.Data.SqlClient;
+using Npgsql;
 using ClinicManagement.Domain.Entities;
 using ClinicManagement.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
@@ -28,10 +28,10 @@ public class AppointmentService : IAppointmentService
         var departments = new List<Department>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("select * from deptInfo", con)
+            await using var cmd = new NpgsqlCommand("select * from deptInfo", con)
             {
                 CommandType = CommandType.Text
             };
@@ -46,9 +46,9 @@ public class AppointmentService : IAppointmentService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving department info");
+            _logger.LogError(ex, "PostgreSQL error retrieving department info");
         }
         return departments;
     }
@@ -59,16 +59,16 @@ public class AppointmentService : IAppointmentService
         var slots = new List<Appointment>();
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            await using var cmd = new SqlCommand("RetrieveFreeSlots", con)
+            await using var cmd = new NpgsqlCommand("RetrieveFreeSlots", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@dID", SqlDbType.Int).Value = doctorId;
-            cmd.Parameters.Add("@pID", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@dID", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
+            cmd.Parameters.Add("@pID", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@count", NpgsqlTypes.NpgsqlDbType.Integer).Direction = ParameterDirection.Output;
 
             await using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
             int rowIndex = 0;
@@ -83,9 +83,9 @@ public class AppointmentService : IAppointmentService
                 });
             }
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error retrieving free slots for doctor {DoctorId}", doctorId);
+            _logger.LogError(ex, "PostgreSQL error retrieving free slots for doctor {DoctorId}", doctorId);
         }
         return slots;
     }
@@ -96,25 +96,23 @@ public class AppointmentService : IAppointmentService
         string message = string.Empty;
         try
         {
-            await using var con = new SqlConnection(_connectionString);
+            await using var con = new NpgsqlConnection(_connectionString);
             await con.OpenAsync(cancellationToken);
 
-            con.InfoMessage += (sender, e) => { message += "\n" + e.Message; };
-
-            await using var cmd = new SqlCommand("insertInAppointmentTable", con)
+            await using var cmd = new NpgsqlCommand("insertInAppointmentTable", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            cmd.Parameters.Add("@dID", SqlDbType.Int).Value = doctorId;
-            cmd.Parameters.Add("@pID", SqlDbType.Int).Value = patientId;
-            cmd.Parameters.Add("@freeSlot", SqlDbType.Int).Value = freeSlot;
+            cmd.Parameters.Add("@dID", NpgsqlTypes.NpgsqlDbType.Integer).Value = doctorId;
+            cmd.Parameters.Add("@pID", NpgsqlTypes.NpgsqlDbType.Integer).Value = patientId;
+            cmd.Parameters.Add("@freeSlot", NpgsqlTypes.NpgsqlDbType.Integer).Value = freeSlot;
 
             await cmd.ExecuteNonQueryAsync(cancellationToken);
             return (true, message);
         }
-        catch (SqlException ex)
+        catch (NpgsqlException ex)
         {
-            _logger.LogError(ex, "SQL error booking appointment for patient {PatientId} with doctor {DoctorId}", patientId, doctorId);
+            _logger.LogError(ex, "PostgreSQL error booking appointment for patient {PatientId} with doctor {DoctorId}", patientId, doctorId);
             return (false, ex.Message);
         }
     }
