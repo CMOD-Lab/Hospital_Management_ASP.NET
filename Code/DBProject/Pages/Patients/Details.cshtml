@@ -1,0 +1,12 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Patients.DetailsModel
+@if (Model.Patient is not null)
+{
+    <h1>@Model.Patient.Name</h1>
+    <dl class="row">
+        <dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Patient.Email</dd>
+        <dt class="col-sm-3">Phone</dt><dd class="col-sm-9">@Model.Patient.PhoneNumber</dd>
+        <dt class="col-sm-3">Gender</dt><dd class="col-sm-9">@Model.Patient.Gender</dd>
+        <dt class="col-sm-3">Address</dt><dd class="col-sm-9">@Model.Patient.Address</dd>
+    </dl>
+}

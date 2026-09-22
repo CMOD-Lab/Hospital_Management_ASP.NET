@@ -1,0 +1,19 @@
+@page
+@model ClinicManagementSystem.Web.Pages.Patients.IndexModel
+@{
+    ViewData["Title"] = "Patients";
+}
+<h1>Patients</h1>
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4"><input asp-for="Search" class="form-control" placeholder="Search patients" /></div>
+    <div class="col-md-auto"><button class="btn btn-primary">Search</button></div>
+    <div class="col-md-auto"><a asp-page="Create" class="btn btn-success">Create</a></div>
+</form>
+<table class="table table-striped">
+<thead><tr><th>Name</th><th>Email</th><th>Phone</th><th></th></tr></thead>
+<tbody>
+@foreach (var item in Model.Patients)
+{
+<tr><td>@item.Name</td><td>@item.Email</td><td>@item.PhoneNumber</td><td class="table-actions"><a asp-page="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a><a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a><a asp-page="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a></td></tr>
+}
+</tbody></table>

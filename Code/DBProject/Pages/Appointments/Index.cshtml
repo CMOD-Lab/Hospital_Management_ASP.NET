@@ -1,0 +1,5 @@
+@page
+@model ClinicManagementSystem.Web.Pages.Appointments.IndexModel
+<h1>Appointments</h1>
+<form method="get" class="row g-2 mb-3"><div class="col-md-4"><input asp-for="Search" class="form-control" placeholder="Search appointments" /></div><div class="col-md-auto"><button class="btn btn-primary">Search</button></div><div class="col-md-auto"><a asp-page="Create" class="btn btn-success">Create</a></div></form>
+<table class="table"><thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody>@foreach (var item in Model.Appointments) { <tr><td>@item.PatientId</td><td>@item.DoctorId</td><td>@item.ScheduledAt</td><td>@item.Status</td><td><a asp-page="Details" asp-route-id="@item.Id">Details</a> | <a asp-page="Edit" asp-route-id="@item.Id">Edit</a> | <a asp-page="Delete" asp-route-id="@item.Id">Delete</a></td></tr> }</tbody></table>

@@ -1,0 +1,21 @@
+@page
+@model ClinicManagementSystem.Web.Pages.Doctors.CreateModel
+@{
+    ViewData["Title"] = "Create Doctor";
+}
+<h1>Create Doctor</h1>
+<form method="post" class="row g-3">
+    <div class="col-md-6"><label asp-for="Input.Name"></label><input asp-for="Input.Name" class="form-control" /><span asp-validation-for="Input.Name" class="text-danger"></span></div>
+    <div class="col-md-6"><label asp-for="Input.Email"></label><input asp-for="Input.Email" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.PhoneNumber"></label><input asp-for="Input.PhoneNumber" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.Gender"></label><input asp-for="Input.Gender" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.BirthDate"></label><input asp-for="Input.BirthDate" class="form-control" /></div>
+    <div class="col-12"><label asp-for="Input.Address"></label><input asp-for="Input.Address" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Qualification"></label><input asp-for="Input.Qualification" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Specialization"></label><input asp-for="Input.Specialization" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.YearsOfExperience"></label><input asp-for="Input.YearsOfExperience" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.Salary"></label><input asp-for="Input.Salary" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.ChargesPerVisit"></label><input asp-for="Input.ChargesPerVisit" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.DepartmentId"></label><input asp-for="Input.DepartmentId" class="form-control" /></div>
+    <div class="col-12"><button class="btn btn-success">Save</button> <a asp-page="Index" class="btn btn-secondary">Cancel</a></div>
+</form>

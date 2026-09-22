@@ -1,0 +1,7 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Appointments.DetailsModel
+@if (Model.Appointment is not null)
+{
+<h1>Appointment Details</h1>
+<dl class="row"><dt class="col-sm-3">Patient</dt><dd class="col-sm-9">@Model.Appointment.PatientId</dd><dt class="col-sm-3">Doctor</dt><dd class="col-sm-9">@Model.Appointment.DoctorId</dd><dt class="col-sm-3">Scheduled At</dt><dd class="col-sm-9">@Model.Appointment.ScheduledAt</dd><dt class="col-sm-3">Status</dt><dd class="col-sm-9">@Model.Appointment.Status</dd><dt class="col-sm-3">Notes</dt><dd class="col-sm-9">@Model.Appointment.Notes</dd></dl>
+}

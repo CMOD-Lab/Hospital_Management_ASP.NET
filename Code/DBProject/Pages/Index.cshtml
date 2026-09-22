@@ -1,0 +1,13 @@
+@page
+@model ClinicManagementSystem.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row g-4">
+    <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h5>Doctors</h5><p class="display-6">@Model.Dashboard.DoctorCount</p></div></div></div>
+    <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h5>Patients</h5><p class="display-6">@Model.Dashboard.PatientCount</p></div></div></div>
+    <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h5>Staff</h5><p class="display-6">@Model.Dashboard.StaffCount</p></div></div></div>
+    <div class="col-md-3"><div class="card card-metric"><div class="card-body"><h5>Appointments</h5><p class="display-6">@Model.Dashboard.AppointmentCount</p></div></div></div>
+</div>
+<div class="mt-4 alert alert-info">Estimated revenue: @Model.Dashboard.Revenue.ToString("C")</div>

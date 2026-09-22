@@ -1,0 +1,4 @@
+@page
+@model ClinicManagementSystem.Web.Pages.Appointments.CreateModel
+<h1>Create Appointment</h1>
+<form method="post" class="row g-3"><div class="col-md-4"><label asp-for="Input.PatientId"></label><input asp-for="Input.PatientId" class="form-control" /></div><div class="col-md-4"><label asp-for="Input.DoctorId"></label><input asp-for="Input.DoctorId" class="form-control" /></div><div class="col-md-4"><label asp-for="Input.ScheduledAt"></label><input asp-for="Input.ScheduledAt" class="form-control" /></div><div class="col-12"><label asp-for="Input.Notes"></label><textarea asp-for="Input.Notes" class="form-control"></textarea></div><div class="col-12"><button class="btn btn-success">Save</button></div></form>

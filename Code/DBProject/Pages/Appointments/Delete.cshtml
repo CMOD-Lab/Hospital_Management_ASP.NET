@@ -1,0 +1,8 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Appointments.DeleteModel
+@if (Model.Appointment is not null)
+{
+<h1>Delete Appointment</h1>
+<p>Delete appointment @Model.Appointment.Id scheduled for @Model.Appointment.ScheduledAt?</p>
+<form method="post"><button class="btn btn-danger">Delete</button></form>
+}

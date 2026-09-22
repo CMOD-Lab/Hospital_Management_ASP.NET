@@ -1,0 +1,17 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Doctors.DetailsModel
+@{
+    ViewData["Title"] = "Doctor Details";
+}
+@if (Model.Doctor is not null)
+{
+    <h1>@Model.Doctor.Name</h1>
+    <dl class="row">
+        <dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Doctor.Email</dd>
+        <dt class="col-sm-3">Phone</dt><dd class="col-sm-9">@Model.Doctor.PhoneNumber</dd>
+        <dt class="col-sm-3">Qualification</dt><dd class="col-sm-9">@Model.Doctor.Qualification</dd>
+        <dt class="col-sm-3">Specialization</dt><dd class="col-sm-9">@Model.Doctor.Specialization</dd>
+        <dt class="col-sm-3">Charges</dt><dd class="col-sm-9">@Model.Doctor.ChargesPerVisit.ToString("C")</dd>
+    </dl>
+    <a asp-page="Edit" asp-route-id="@Model.Doctor.Id" class="btn btn-warning">Edit</a>
+}

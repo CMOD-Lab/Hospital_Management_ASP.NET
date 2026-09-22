@@ -1,0 +1,8 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.StaffMembers.DeleteModel
+@if (Model.StaffMember is not null)
+{
+<h1>Delete Staff Member</h1>
+<p>Delete @Model.StaffMember.Name?</p>
+<form method="post"><button class="btn btn-danger">Delete</button></form>
+}
