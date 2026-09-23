@@ -30,7 +30,7 @@ public sealed class EditModel : CreateModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
+    public new async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid) return Page();
         var dto = new DoctorUpdateDto(Input.Name, Input.Email, Input.PhoneNumber, Input.Gender, Input.Qualification, Input.Specialization, Input.Address, Input.ChargesPerVisit, Input.ExperienceYears, Input.DepartmentId);

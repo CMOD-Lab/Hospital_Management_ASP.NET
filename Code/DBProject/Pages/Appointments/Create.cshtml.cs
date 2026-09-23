@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ClinicManagementSystem.Web.Pages.Appointments;
 
-public sealed class CreateModel : PageModel
+public class CreateModel : PageModel
 {
     private readonly IAppointmentService _service;
     public CreateModel(IAppointmentService service) => _service = service;
@@ -23,7 +23,7 @@ public sealed class CreateModel : PageModel
         return RedirectToPage("Index");
     }
 
-    public sealed class AppointmentInputModel
+    public class AppointmentInputModel
     {
         [Required] public string Name { get; set; } = string.Empty;
         [Range(1, int.MaxValue)] public int PatientId { get; set; }

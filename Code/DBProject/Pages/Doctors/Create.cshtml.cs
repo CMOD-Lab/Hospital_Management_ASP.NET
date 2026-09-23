@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ClinicManagementSystem.Web.Pages.Doctors;
 
-public sealed class CreateModel : PageModel
+public class CreateModel : PageModel
 {
     private readonly IDoctorService _service;
     public CreateModel(IDoctorService service) => _service = service;
@@ -24,7 +24,7 @@ public sealed class CreateModel : PageModel
         return RedirectToPage("Index");
     }
 
-    public sealed class DoctorInputModel
+    public class DoctorInputModel
     {
         [Required] public string Name { get; set; } = string.Empty;
         [Required, EmailAddress] public string Email { get; set; } = string.Empty;

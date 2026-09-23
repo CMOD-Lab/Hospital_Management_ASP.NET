@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ClinicManagementSystem.Web.Pages.Departments;
 
-public sealed class CreateModel : PageModel
+public class CreateModel : PageModel
 {
     private readonly IDepartmentService _service;
     public CreateModel(IDepartmentService service) => _service = service;
@@ -23,7 +23,7 @@ public sealed class CreateModel : PageModel
         return RedirectToPage("Index");
     }
 
-    public sealed class DepartmentInputModel
+    public class DepartmentInputModel
     {
         [Required] public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }

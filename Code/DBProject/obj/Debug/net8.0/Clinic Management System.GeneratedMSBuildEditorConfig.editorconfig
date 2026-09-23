@@ -1,0 +1,121 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ClinicManagementSystem.Web
+build_property.RootNamespace = ClinicManagementSystem.Web
+build_property.ProjectDir = /modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Appointments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwb2ludG1lbnRzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Appointments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwb2ludG1lbnRzL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Appointments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwb2ludG1lbnRzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Appointments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwb2ludG1lbnRzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Appointments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXBwb2ludG1lbnRzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Departments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Departments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudHMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Departments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Departments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudHMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Departments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Doctors/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9ycy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Doctors/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9ycy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Doctors/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9ycy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Doctors/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9ycy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Doctors/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9ycy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Patients/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF0aWVudHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Patients/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF0aWVudHMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Patients/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF0aWVudHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Patients/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF0aWVudHMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Patients/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF0aWVudHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP168835/transformed-code/132/studio-workspace/Backend Services/Code/DBProject/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

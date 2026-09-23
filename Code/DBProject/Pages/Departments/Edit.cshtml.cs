@@ -17,7 +17,7 @@ public sealed class EditModel : CreateModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
+    public new async Task<IActionResult> OnPostAsync(int id, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid) return Page();
         await _departmentService.UpdateAsync(id, new DepartmentUpdateDto(Input.Name, Input.Description), cancellationToken);
