@@ -21,6 +21,10 @@ public sealed class ClinicManagementDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.HasDefaultSchema("public");
+        builder.HasPostgresExtension("uuid-ossp");
+
         builder.ApplyConfigurationsFromAssembly(typeof(ClinicManagementDbContext).Assembly);
     }
 }

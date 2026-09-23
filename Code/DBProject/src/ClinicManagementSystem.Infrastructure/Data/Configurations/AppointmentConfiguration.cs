@@ -8,13 +8,16 @@ public sealed class AppointmentConfiguration : IEntityTypeConfiguration<Appointm
 {
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
-        builder.ToTable("Appointments");
+        builder.ToTable("appointments");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+        builder.Property(x => x.ScheduledAt).HasColumnType("timestamp with time zone");
         builder.Property(x => x.Status).IsRequired().HasMaxLength(50);
         builder.Property(x => x.Prescription).HasMaxLength(1000);
         builder.Property(x => x.ProgressNotes).HasMaxLength(1000);
         builder.Property(x => x.Disease).HasMaxLength(250);
+        builder.Property(x => x.CreatedDate).HasColumnType("timestamp with time zone");
+        builder.Property(x => x.ModifiedDate).HasColumnType("timestamp with time zone");
         builder.HasOne(x => x.Patient)
             .WithMany(x => x.Appointments)
             .HasForeignKey(x => x.PatientId)
