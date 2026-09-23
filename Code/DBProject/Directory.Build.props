@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
+    <DefaultProjectFile Condition="'$(DefaultProjectFile)' == '' and Exists('$(MSBuildThisFileDirectory)DBProject.sln')">$(MSBuildThisFileDirectory)DBProject.sln</DefaultProjectFile>
+  </PropertyGroup>
+
+  <Target Name="UseSolutionAsDefaultProjectFile" BeforeTargets="Build;Restore;Rebuild;Clean;Test;Publish" Condition="'$(MSBuildProjectFullPath)' == '' and '$(DefaultProjectFile)' != ''">
+    <Message Importance="high" Text="Default project file available at $(DefaultProjectFile). Invoke MSBuild/dotnet with the solution or project path when running from the repository root." />
+  </Target>
+</Project>

@@ -1,0 +1,12 @@
+@page
+@model ClinicManagementSystem.Web.Pages.Patients.CreateModel
+<h1>Create Patient</h1>
+<form method="post" class="row g-3">
+    <div class="col-md-6"><label asp-for="Input.Name" class="form-label"></label><input asp-for="Input.Name" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Email" class="form-label"></label><input asp-for="Input.Email" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.PhoneNumber" class="form-label"></label><input asp-for="Input.PhoneNumber" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.BirthDate" class="form-label"></label><input asp-for="Input.BirthDate" class="form-control" type="date" /></div>
+    <div class="col-md-6"><label asp-for="Input.Gender" class="form-label"></label><input asp-for="Input.Gender" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Address" class="form-label"></label><input asp-for="Input.Address" class="form-control" /></div>
+    <div class="col-12"><button type="submit" class="btn btn-primary">Save</button></div>
+</form>

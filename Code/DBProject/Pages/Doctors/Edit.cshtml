@@ -1,0 +1,16 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Doctors.EditModel
+<h1>Edit Doctor</h1>
+<form method="post" class="row g-3">
+    <div class="col-md-6"><label asp-for="Input.Name" class="form-label"></label><input asp-for="Input.Name" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Email" class="form-label"></label><input asp-for="Input.Email" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.PhoneNumber" class="form-label"></label><input asp-for="Input.PhoneNumber" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Specialization" class="form-label"></label><input asp-for="Input.Specialization" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Qualification" class="form-label"></label><input asp-for="Input.Qualification" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Gender" class="form-label"></label><input asp-for="Input.Gender" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Address" class="form-label"></label><input asp-for="Input.Address" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="Input.ChargesPerVisit" class="form-label"></label><input asp-for="Input.ChargesPerVisit" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="Input.ExperienceYears" class="form-label"></label><input asp-for="Input.ExperienceYears" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="Input.DepartmentId" class="form-label"></label><input asp-for="Input.DepartmentId" class="form-control" /></div>
+    <div class="col-12"><button type="submit" class="btn btn-primary">Update</button></div>
+</form>

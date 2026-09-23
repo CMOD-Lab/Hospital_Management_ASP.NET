@@ -1,0 +1,14 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Appointments.EditModel
+<h1>Edit Appointment</h1>
+<form method="post" class="row g-3">
+    <div class="col-md-6"><label asp-for="Input.Name" class="form-label"></label><input asp-for="Input.Name" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="Input.PatientId" class="form-label"></label><input asp-for="Input.PatientId" class="form-control" /></div>
+    <div class="col-md-3"><label asp-for="Input.DoctorId" class="form-label"></label><input asp-for="Input.DoctorId" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.ScheduledAt" class="form-label"></label><input asp-for="Input.ScheduledAt" class="form-control" type="datetime-local" /></div>
+    <div class="col-md-4"><label asp-for="Input.Status" class="form-label"></label><input asp-for="Input.Status" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Input.Disease" class="form-label"></label><input asp-for="Input.Disease" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.ProgressNotes" class="form-label"></label><input asp-for="Input.ProgressNotes" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Prescription" class="form-label"></label><input asp-for="Input.Prescription" class="form-control" /></div>
+    <div class="col-12"><button type="submit" class="btn btn-primary">Update</button></div>
+</form>

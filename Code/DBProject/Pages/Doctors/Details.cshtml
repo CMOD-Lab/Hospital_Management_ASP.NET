@@ -1,0 +1,15 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Doctors.DetailsModel
+<h1>Doctor Details</h1>
+@if (Model.Item is null)
+{
+    <p>Doctor not found.</p>
+}
+else
+{
+    <dl class="row">
+        <dt class="col-sm-2">Name</dt><dd class="col-sm-10">@Model.Item.Name</dd>
+        <dt class="col-sm-2">Email</dt><dd class="col-sm-10">@Model.Item.Email</dd>
+        <dt class="col-sm-2">Specialization</dt><dd class="col-sm-10">@Model.Item.Specialization</dd>
+    </dl>
+}

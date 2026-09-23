@@ -1,9 +1,18 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinic Management System", "DBProject\Clinic Management System.csproj", "{B2ABDB6C-A1B7-460C-84D1-FB2317C5C666}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.Web", "DBProject\Clinic Management System.csproj", "{B2ABDB6C-A1B7-460C-84D1-FB2317C5C666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.Domain", "DBProject\src\ClinicManagementSystem.Domain\ClinicManagementSystem.Domain.csproj", "{A1111111-A1B7-460C-84D1-FB2317C5C661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.Application", "DBProject\src\ClinicManagementSystem.Application\ClinicManagementSystem.Application.csproj", "{A1111111-A1B7-460C-84D1-FB2317C5C662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.Infrastructure", "DBProject\src\ClinicManagementSystem.Infrastructure\ClinicManagementSystem.Infrastructure.csproj", "{A1111111-A1B7-460C-84D1-FB2317C5C663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.UnitTests", "DBProject\tests\ClinicManagementSystem.UnitTests\ClinicManagementSystem.UnitTests.csproj", "{A1111111-A1B7-460C-84D1-FB2317C5C664}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagementSystem.IntegrationTests", "DBProject\tests\ClinicManagementSystem.IntegrationTests\ClinicManagementSystem.IntegrationTests.csproj", "{A1111111-A1B7-460C-84D1-FB2317C5C665}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,11 +24,28 @@ Global
 		{B2ABDB6C-A1B7-460C-84D1-FB2317C5C666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2ABDB6C-A1B7-460C-84D1-FB2317C5C666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2ABDB6C-A1B7-460C-84D1-FB2317C5C666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1111111-A1B7-460C-84D1-FB2317C5C665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6980D4B7-EB6E-4DD2-9657-ED23415262D8}
 	EndGlobalSection
 EndGlobal

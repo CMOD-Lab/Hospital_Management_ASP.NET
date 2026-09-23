@@ -1,0 +1,8 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Departments.EditModel
+<h1>Edit Department</h1>
+<form method="post" class="row g-3">
+    <div class="col-md-6"><label asp-for="Input.Name" class="form-label"></label><input asp-for="Input.Name" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="Input.Description" class="form-label"></label><input asp-for="Input.Description" class="form-control" /></div>
+    <div class="col-12"><button type="submit" class="btn btn-primary">Update</button></div>
+</form>

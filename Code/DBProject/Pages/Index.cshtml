@@ -1,0 +1,16 @@
+@page
+@model ClinicManagementSystem.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold">Clinic Management System</h1>
+        <p class="col-md-8 fs-5">A modern .NET 8 Razor Pages application migrated from legacy ASP.NET Web Forms using clean architecture principles.</p>
+        <div class="d-flex gap-2">
+            <a asp-page="/Doctors/Index" class="btn btn-primary btn-lg">Manage Doctors</a>
+            <a asp-page="/Patients/Index" class="btn btn-outline-primary btn-lg">Manage Patients</a>
+        </div>
+    </div>
+</div>

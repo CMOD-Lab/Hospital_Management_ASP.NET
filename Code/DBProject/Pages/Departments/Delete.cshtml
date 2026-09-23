@@ -1,0 +1,4 @@
+@page "{id:int}"
+@model ClinicManagementSystem.Web.Pages.Departments.DeleteModel
+<h1>Delete Department</h1>
+@if (Model.Item is not null){<p>Delete department <strong>@Model.Item.Name</strong>?</p><form method="post"><button type="submit" class="btn btn-danger">Delete</button></form>}
