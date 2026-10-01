@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clinic-management-system
+  namespace: clinic-management-system
+  labels:
+    app: clinic-management-system
+    version: "1.0"
+    tier: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: clinic-management-system
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: clinic-management-system
+        version: "1.0"
+        tier: web
+    spec:
+      # Windows node pool selector - required for .NET Framework Windows containers
+      nodeSelector:
+        kubernetes.io/os: windows
+      tolerations:
+        - key: "os"
+          operator: "Equal"
+          value: "windows"
+          effect: "NoSchedule"
+      containers:
+        - name: clinic-management-system
+          image: "{{IMAGE_URI}}"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            # ASP.NET environment
+            - name: ASPNET_ENV
+              value: "Production"
+            # SQL Server connection string
+            - name: SQL_CONNECTION_STRING
+              value: "{{SQL_CONNECTION_STRING}}"
+            # Redis connection string for session state
+            - name: REDIS_CONNECTION_STRING
+              value: "{{REDIS_CONNECTION_STRING}}"
+            # Application Insights instrumentation key
+            - name: APPINSIGHTS_INSTRUMENTATIONKEY
+              value: "{{APPINSIGHTS_INSTRUMENTATIONKEY}}"
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+          # Liveness probe - checks Health.aspx endpoint
+          livenessProbe:
+            httpGet:
+              path: /Health.aspx
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+          # Readiness probe - checks Health.aspx endpoint
+          readinessProbe:
+            httpGet:
+              path: /Health.aspx
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+          # Startup probe - allows extra time for IIS/.NET Framework startup
+          startupProbe:
+            httpGet:
+              path: /Health.aspx
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 12
+            successThreshold: 1
+      terminationGracePeriodSeconds: 60

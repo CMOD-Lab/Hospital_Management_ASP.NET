@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 namespace doctor
@@ -18,7 +19,7 @@ namespace doctor
             DataTable dt = new DataTable();
             int found;
 
-            int did = (int)Session["idoriginal"];
+            int did = RedisSessionHelper.GetInt("idoriginal");
             
             found = objmyDAL.generate_bill_DAL(did, ref dt);
 
@@ -35,8 +36,8 @@ namespace doctor
         {
             myDAL objmyDAL = new myDAL();
             
-            int  did = (int)Session["idoriginal"];
-            int appoint = (int)Session["appointid"];
+            int  did = RedisSessionHelper.GetInt("idoriginal");
+            int appoint = RedisSessionHelper.GetInt("appointid");
             objmyDAL.paid_bill_DAL(did,appoint);
 
 			Response.BufferOutput = false;
@@ -48,8 +49,8 @@ namespace doctor
         {
             myDAL objmyDAL = new myDAL();
 
-            int did = (int)Session["idoriginal"];
-            int appoint = (int)Session["appointid"];
+            int did = RedisSessionHelper.GetInt("idoriginal");
+            int appoint = RedisSessionHelper.GetInt("appointid");
             objmyDAL.Unpaid_bill_DAL(did, appoint);
 
             Response.BufferOutput = false;

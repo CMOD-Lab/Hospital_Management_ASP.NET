@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -25,15 +26,15 @@ namespace DBProject
             myDAL objmyDAl = new myDAL();
 
             
-            string dID1 = (string)Session["dID"];
+            string dID1 = RedisSessionHelper.Get("dID");
 
             int dID = Convert.ToInt32(dID1);
 
 
-            int pID = (int)Session["idoriginal"];
+            int pID = RedisSessionHelper.GetInt("idoriginal");
 
 
-            string temp = (string)Session["freeSlot"];
+            string temp = RedisSessionHelper.Get("freeSlot");
 
             int freeSlot = Convert.ToInt32(temp);
 

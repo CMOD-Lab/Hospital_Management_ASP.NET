@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -14,7 +15,7 @@ namespace DBProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["freeSlot"] = "";
+            RedisSessionHelper.Set("freeSlot", "");
             freeSlots(sender, e);
         }
 
@@ -30,7 +31,7 @@ namespace DBProject
 
                 string[] tokens = appointment.Split(':');
 
-                Session["freeSlot"] = tokens[0];
+                RedisSessionHelper.Set("freeSlot", tokens[0]);
 
                 Response.BufferOutput = true;
                 Response.Redirect("AppointmentRequestSent.aspx");
@@ -49,12 +50,12 @@ namespace DBProject
             DataTable DT = new DataTable();
 
 
-            string dID1 = (string)Session["dID"];
+            string dID1 = RedisSessionHelper.Get("dID");
 
             int dID = Convert.ToInt32(dID1);
 
 
-            int pID = (int)Session["idoriginal"];
+            int pID = RedisSessionHelper.GetInt("idoriginal");
 
             
             int status = objmyDAl.getFreeSlots(dID, pID, ref DT);

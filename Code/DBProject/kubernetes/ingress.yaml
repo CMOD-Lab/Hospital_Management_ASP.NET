@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: clinic-management-system-ingress
+  namespace: clinic-management-system
+  labels:
+    app: clinic-management-system
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/backend-protocol: "http"
+    appgw.ingress.kubernetes.io/request-timeout: "60"
+    appgw.ingress.kubernetes.io/connection-draining: "true"
+    appgw.ingress.kubernetes.io/connection-draining-timeout: "30"
+spec:
+  rules:
+    - host: clinic-management-system.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: clinic-management-system-service
+                port:
+                  number: 80

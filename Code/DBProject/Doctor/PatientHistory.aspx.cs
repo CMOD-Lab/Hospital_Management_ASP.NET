@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -18,7 +19,7 @@ namespace doctor
                 DataTable dt = new DataTable();
                 int found = 0;
 
-                int did = (int)Session["idoriginal"];
+                int did = RedisSessionHelper.GetInt("idoriginal");
 
                 found = objmydal.search_patient_DAL(did, ref dt);
                 if (found != 1)
@@ -43,7 +44,7 @@ namespace doctor
                 //retrieve appointmentid  from that row (key-non editable)
                 int appointmentid = Convert.ToInt32(aId);
 
-                Session["appointid"] = appointmentid;
+                RedisSessionHelper.Set("appointid", appointmentid.ToString());
                 Response.Redirect("Historyupdate.aspx");
             }
         }

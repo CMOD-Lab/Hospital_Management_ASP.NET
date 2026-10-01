@@ -13,9 +13,16 @@ namespace DBProject.DAL
 	//Database Layer of 3 tier architecture
 	public class myDAL
     {
-		//connection string of the server database
+		// Connection string resolved from environment variable DB_CONNECTION_STRING
+        // (injected via AKS ConfigMap / Azure Key Vault CSI Driver with Workload Identity).
+        // Falls back to Web.config ConnectionStrings["sqlCon1"] for local development only.
         private static readonly string connString =
-            System.Configuration.ConfigurationManager.ConnectionStrings["sqlCon1"].ConnectionString;
+            System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+            ?? System.Configuration.ConfigurationManager.ConnectionStrings["sqlCon1"]?.ConnectionString
+            ?? throw new InvalidOperationException(
+                "Database connection string is not configured. " +
+                "Set the DB_CONNECTION_STRING environment variable (AKS ConfigMap / Azure Key Vault CSI Driver) " +
+                "or provide a 'sqlCon1' entry in Web.config for local development.");
 
 
 

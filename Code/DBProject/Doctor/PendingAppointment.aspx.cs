@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -22,7 +23,7 @@ namespace doctor
         {
                 myDAL objDAL = new myDAL();
                 
-               int did = (int)Session["idoriginal"];
+               int did = RedisSessionHelper.GetInt("idoriginal");
 
                     DataTable DT = new DataTable();
 

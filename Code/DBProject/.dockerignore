@@ -1,0 +1,79 @@
+# .dockerignore for Clinic Management System (.NET Framework 4.5.2 ASP.NET Web Application)
+# Excludes build artifacts, IDE files, and unnecessary files from Docker build context
+
+# Build output directories
+bin/
+obj/
+publish/
+
+# Visual Studio IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages (restored during build)
+packages/
+*.nupkg
+*.nuspec
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README*
+CHANGELOG*
+DEPLOYMENT*
+docs/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test projects and results
+*Tests/
+*Test/
+TestResults/
+*.trx
+*.coverage
+
+# CI/CD configuration
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+Jenkinsfile
+
+# Scripts (not needed in container)
+scripts/
+kubernetes/
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Roslyn compiler output (already in bin/)
+# (covered by bin/ above)
+
+# Launch settings (development only)
+Properties/launchSettings.json
+
+# Debug symbols (excluded in Release build)
+*.pdb
+
+# XML documentation files
+*.xml
+
+# Config transforms (handled at build time)
+Web.Debug.config
+Web.Release.config

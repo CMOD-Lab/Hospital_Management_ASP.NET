@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -18,7 +19,7 @@ namespace DBProject
         {
 			if (!IsPostBack)
 			{
-				Session["aID"] = "";
+				RedisSessionHelper.Set("aID", "");
 				pendingFeedback(sender, e);
 			}
         }
@@ -32,7 +33,7 @@ namespace DBProject
         {
             myDAL objmyDAl = new myDAL();
 
-            int pid = (int)Session["idoriginal"];
+            int pid = RedisSessionHelper.GetInt("idoriginal");
 
             string dName = "";
             string timings = "";
@@ -53,7 +54,7 @@ namespace DBProject
 
             else
             {
-                Session["aID"] = aID;
+                RedisSessionHelper.Set("aID", aID.ToString());
 
                 FDoctor.Text = "Your feedback for the appointment with Doctor " + dName + " is pending. Kindly give it.";
                 FTimings.Text = "The Appointment Timings were : " + timings;
@@ -76,7 +77,7 @@ namespace DBProject
         {
             myDAL objmyDAl = new myDAL();
 
-            int aID = (int)Session["aID"];
+            int aID = RedisSessionHelper.GetInt("aID");
 
 
             int rating = Convert.ToInt32(List.SelectedItem.Value);

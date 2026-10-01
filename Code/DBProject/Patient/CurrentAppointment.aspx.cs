@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DBProject.DAL;
+using DBProject.Helpers;
 using System.Data;
 
 
@@ -25,7 +26,7 @@ namespace DBProject
         {
             myDAL objmyDAl = new myDAL();
 
-            int pid = (int)Session["idoriginal"];
+            int pid = RedisSessionHelper.GetInt("idoriginal");
 
             string dName = "";
             string timings = "";
@@ -69,8 +70,6 @@ namespace DBProject
 
 
         //-----------------------Add a new function here------------------//
-
-
 
 
 
